@@ -86,7 +86,7 @@ int main()
 		mesh.loadImageToGPU("../Textures/container2_specular.png", GL_RGBA, GL_RGBA, 1),
 		glm::vec3(0.3f, 0.3f, 0.3f),
 		32.0f);
-	Model model("../Model/uploads_files_2118289_Legendary_Robot.obj");
+	Model model("../Model/robot sketchfab&&fbx.fbx");
 
 	glm::mat4 modelMat = glm::mat4(1.0f);
 	glm::mat4 viewMat;
