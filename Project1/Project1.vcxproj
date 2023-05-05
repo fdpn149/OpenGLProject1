@@ -161,6 +161,7 @@
     <ClCompile Include="..\Source\Material.cpp" />
     <ClCompile Include="..\Source\Mesh.cpp" />
     <ClCompile Include="..\Source\Model.cpp" />
+    <ClCompile Include="..\Source\Model2.cpp" />
     <ClCompile Include="..\Source\Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +170,7 @@
     <ClInclude Include="..\Header\Material.h" />
     <ClInclude Include="..\Header\Mesh.h" />
     <ClInclude Include="..\Header\Model.h" />
+    <ClInclude Include="..\Header\Model2.h" />
     <ClInclude Include="..\Header\Shader.h" />
   </ItemGroup>
   <ItemGroup>

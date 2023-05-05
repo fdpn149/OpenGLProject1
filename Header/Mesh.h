@@ -27,6 +27,7 @@ class Mesh
 	void setupMesh();
 public:
 	Mesh(float vertices[], int size);
+	Mesh(std::vector<Vertex> vertices);
 	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures);
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;

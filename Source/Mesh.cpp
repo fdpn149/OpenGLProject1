@@ -9,6 +9,13 @@ Mesh::Mesh(float vertices[], int size)
 	setupMesh();
 }
 
+Mesh::Mesh(std::vector<Vertex> vertices)
+{
+	mode = 0;
+	this->vertices.insert(this->vertices.end(), vertices.begin(), vertices.end());
+	setupMesh();
+}
+
 Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures)
 {
 	mode = 1;
@@ -62,7 +69,7 @@ void Mesh::draw(Shader* shader)
 	glBindVertexArray(VAO);
 	switch (mode)
 	{
-	case 0: glDrawArrays(GL_TRIANGLES, 0, 36); break;
+	case 0: glDrawArrays(GL_TRIANGLES, 0, vertices.size()); break;
 	case 1: glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, (void*)0);
 	}
 	glBindVertexArray(0);

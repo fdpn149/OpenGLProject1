@@ -11,6 +11,7 @@
 #include "../Header/Camera.h"
 #include "../Header/Light.h"
 #include "../Header/Model.h"
+#include "../Header/Model2.h"
 
 void initGLFW();
 GLFWwindow* initWindow();
@@ -86,7 +87,8 @@ int main()
 		mesh.loadImageToGPU("../Textures/container2_specular.png", GL_RGBA, GL_RGBA, 1),
 		glm::vec3(0.3f, 0.3f, 0.3f),
 		32.0f);
-	Model model("../Model/uploads_files_2118289_Legendary_Robot.obj");
+	//Model model("../Model/test.obj");
+	Model2 model2;
 
 	glm::mat4 modelMat = glm::mat4(1.0f);
 	glm::mat4 viewMat;
@@ -123,7 +125,8 @@ int main()
 		shader.setVec3("cameraPos", camera.position);
 
 		mesh.draw(&shader);	//Draw Box
-		model.Draw(material.shader);	//Draw Model
+		model2.draw(&shader);
+		//model.Draw(material.shader);	//Draw Model
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
