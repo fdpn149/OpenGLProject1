@@ -1,5 +1,6 @@
 #include "../Header/Mesh.h"
 #include <STB/stb_image.h>
+#include <glm/gtc/matrix_transform.hpp>
 
 Mesh::Mesh(float vertices[], int size)
 {
@@ -40,9 +41,32 @@ void Mesh::setupMesh()
 	glBindVertexArray(0);
 }
 
+void Mesh::hierarchyTrans(glm::mat4& modelMat, Node* node)
+{
+	if (node != nullptr)
+	{
+		Node* tempNode = node->parent;
+		hierarchyTrans(modelMat, tempNode);
+		if (Transform::trans.find(node->name) != Transform::trans.end())
+		{
+			modelMat = glm::translate(modelMat, -Transform::trans[node->name].translate);
+			modelMat = glm::rotate(modelMat, Transform::trans[node->name].rotate.w, glm::vec3(Transform::trans[node->name].rotate));
+			modelMat = glm::scale(modelMat, Transform::trans[node->name].scale);
+			modelMat = glm::translate(modelMat, Transform::trans[node->name].translate);
+		}
+	}
+}
+
 
 void Mesh::draw(Shader* shader)
 {
+	glm::mat4 modelMat = glm::mat4(1.0f);
+
+	hierarchyTrans(modelMat, node);
+
+	shader->use();
+	shader->setMat4("model", modelMat);
+
 	for (int i = 0; i < textures.size(); i++)
 	{
 		if (textures[i].type == "texture_diffuse")

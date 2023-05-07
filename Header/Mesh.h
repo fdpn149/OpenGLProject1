@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "Shader.h"
+#include "Transform.h"
 
 struct Vertex
 {
@@ -19,13 +20,22 @@ struct Texture
 	std::string path;
 };
 
+struct Node
+{
+	std::string name;
+	Node* parent;
+};
+
 class Mesh
 {
 	unsigned int VAO, VBO, EBO;
 	int size;
 	int mode;
 	void setupMesh();
+	void hierarchyTrans(glm::mat4& modelMat, Node* node);
 public:
+	Node* node = nullptr;
+	Transform transform;
 	Mesh(float vertices[], int size);
 	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures);
 	std::vector<Vertex> vertices;

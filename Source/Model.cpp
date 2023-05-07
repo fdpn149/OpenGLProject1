@@ -6,6 +6,14 @@ Model::Model(std::string path)
 	loadModel(path);
 }
 
+Model::~Model()
+{
+	for (auto i : inherit)
+	{
+		delete i.second;
+	}
+}
+
 void Model::Draw(Shader* shader)
 {
 	for (GLuint i = 0; i < meshes.size(); i++)
@@ -17,7 +25,8 @@ void Model::Draw(Shader* shader)
 void Model::loadModel(std::string path)
 {
 	Assimp::Importer importer;
-	const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
+	//const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
+	const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_CalcTangentSpace);
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
 		printf("Assimp error\n");
@@ -29,10 +38,40 @@ void Model::loadModel(std::string path)
 
 void Model::processNode(aiNode* node, const aiScene* scene)
 {
+	std::string name;
+	name = node->mName.C_Str();
+	int count = std::count(name.begin(), name.end(), ':');
+	if (count > 0)
+	{
+		if (count > 1)
+			printf("");
+		unsigned int index = name.find_last_of(':');
+		name = name.substr(index + 1, name.length() - 1);
+		inherit[name] = new Node({ name, nullptr });
+		if (count > 1)
+		{
+			std::string current = name;
+			name = node->mName.C_Str();
+			name = name.substr(0, index);
+
+			index = name.find_last_of(':');
+			unsigned int index2 = name.find_last_of(' ');
+			name = name.substr(index + 1, index2 - index - 1);
+			inherit[current]->parent = inherit[name];
+			name = current;
+		}
+	}
+	
 	for (GLuint i = 0; i < node->mNumMeshes; i++)
 	{
 		aiMesh* curMesh = scene->mMeshes[node->mMeshes[i]];
-		meshes.push_back(processMesh(curMesh, scene));
+		Mesh newMesh = processMesh(curMesh, scene);
+		if (inherit.find(name) != inherit.end())
+		{
+			newMesh.node = inherit[name];
+		}
+		
+		meshes.push_back(newMesh);
 	}
 
 	for (GLuint i = 0; i < node->mNumChildren; i++)
