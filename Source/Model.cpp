@@ -43,8 +43,6 @@ void Model::processNode(aiNode* node, const aiScene* scene)
 	int count = std::count(name.begin(), name.end(), ':');
 	if (count > 0)
 	{
-		if (count > 1)
-			printf("");
 		unsigned int index = name.find_last_of(':');
 		name = name.substr(index + 1, name.length() - 1);
 		inherit[name] = new Node({ name, nullptr });
@@ -60,6 +58,7 @@ void Model::processNode(aiNode* node, const aiScene* scene)
 			inherit[current]->parent = inherit[name];
 			name = current;
 		}
+		Transform::trans[name];
 	}
 	
 	for (GLuint i = 0; i < node->mNumMeshes; i++)
@@ -129,7 +128,7 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
 			aiTextureType_SPECULAR, "texture_specular");
 		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 	}
-	return Mesh({ tempVertices,tempIndices,{} });
+	return Mesh({ tempVertices,tempIndices,textures });
 }
 
 std::vector<Texture> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName)

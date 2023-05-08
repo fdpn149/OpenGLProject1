@@ -20,19 +20,12 @@ struct Texture
 	std::string path;
 };
 
-struct Node
-{
-	std::string name;
-	Node* parent;
-};
-
 class Mesh
 {
 	unsigned int VAO, VBO, EBO;
 	int size;
 	int mode;
 	void setupMesh();
-	void hierarchyTrans(glm::mat4& modelMat, Node* node);
 public:
 	Node* node = nullptr;
 	Transform transform;

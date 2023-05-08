@@ -1,6 +1,6 @@
 #define GLEW_STATIC
 #define STB_IMAGE_IMPLEMENTATION
-#define SIZEOF(x) (sizeof(vertices) / sizeof(float))
+#define SIZEOF(x) (sizeof(box_vertices) / sizeof(float))
 #include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -19,49 +19,49 @@ void initGLEW();
 
 Camera camera(glm::vec3(0, 0, 3.0f), glm::radians(0.0f), glm::radians(0.0f), glm::vec3(0, 1.0f, 0));
 
-float vertices[] = {
-	// positions          // normals           // texture coords
-	 0.0f,  0.0f,  0.0f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
-	 1.0f,  0.0f,  0.0f,  0.0f,  0.0f, -1.0f,  1.0f,  0.0f,
-	 1.0f,  1.0f,  0.0f,  0.0f,  0.0f, -1.0f,  1.0f,  1.0f,
-	 1.0f,  1.0f,  0.0f,  0.0f,  0.0f, -1.0f,  1.0f,  1.0f,
-	 0.0f,  1.0f,  0.0f,  0.0f,  0.0f, -1.0f,  0.0f,  1.0f,
-	 0.0f,  0.0f,  0.0f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
+float box_vertices[] = {
+	// positions         // normals       // texture coords
+	-0.5f,  -0.5f,  -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
+	 0.5f,  -0.5f,  -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  0.0f,
+	 0.5f,   0.5f,  -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  1.0f,
+	 0.5f,   0.5f,  -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  1.0f,
+	-0.5f,   0.5f,  -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  1.0f,
+	-0.5f,  -0.5f,  -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
 
-	 0.0f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,
-	 1.0f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f,  1.0f,  0.0f,
-	 1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f,
-	 1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f,
-	 0.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f,  0.0f,  1.0f,
-	 0.0f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,
+	-0.5f,  -0.5f,   0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,
+	 0.5f,  -0.5f,   0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  0.0f,
+	 0.5f,   0.5f,   0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f,
+	 0.5f,   0.5f,   0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f,
+	-0.5f,   0.5f,   0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  1.0f,
+	-0.5f,  -0.5f,   0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,
 
-	 0.0f,  1.0f,  1.0f, -1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
-	 0.0f,  1.0f,  0.0f, -1.0f,  0.0f,  0.0f,  1.0f,  1.0f,
-	 0.0f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
-	 0.0f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
-	 0.0f,  0.0f,  1.0f, -1.0f,  0.0f,  0.0f,  0.0f,  0.0f,
-	 0.0f,  1.0f,  1.0f, -1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
+	-0.5f,   0.5f,   0.5f, -1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
+	-0.5f,   0.5f,  -0.5f, -1.0f,  0.0f,  0.0f,  1.0f,  1.0f,
+	-0.5f,  -0.5f,  -0.5f, -1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
+	-0.5f,  -0.5f,  -0.5f, -1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
+	-0.5f,  -0.5f,   0.5f, -1.0f,  0.0f,  0.0f,  0.0f,  0.0f,
+	-0.5f,   0.5f,   0.5f, -1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
 
-	 1.0f,  1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
-	 1.0f,  1.0f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f,  1.0f,
-	 1.0f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
-	 1.0f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
-	 1.0f,  0.0f,  1.0f,  1.0f,  0.0f,  0.0f,  0.0f,  0.0f,
-	 1.0f,  1.0f,  1.0f,  1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
+	 0.5f,   0.5f,   0.5f,  1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
+	 0.5f,   0.5f,  -0.5f,  1.0f,  0.0f,  0.0f,  1.0f,  1.0f,
+	 0.5f,  -0.5f,  -0.5f,  1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
+	 0.5f,  -0.5f,  -0.5f,  1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
+	 0.5f,  -0.5f,   0.5f,  1.0f,  0.0f,  0.0f,  0.0f,  0.0f,
+	 0.5f,   0.5f,   0.5f,  1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
 
-	 0.0f,  0.0f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,  1.0f,
-	 1.0f,  0.0f,  0.0f,  0.0f, -1.0f,  0.0f,  1.0f,  1.0f,
-	 1.0f,  0.0f,  1.0f,  0.0f, -1.0f,  0.0f,  1.0f,  0.0f,
-	 1.0f,  0.0f,  1.0f,  0.0f, -1.0f,  0.0f,  1.0f,  0.0f,
-	 0.0f,  0.0f,  1.0f,  0.0f, -1.0f,  0.0f,  0.0f,  0.0f,
-	 0.0f,  0.0f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,  1.0f,
+	-0.5f,  -0.5f,  -0.5f,  0.0f, -1.0f,  0.0f,  0.0f,  1.0f,
+	 0.5f,  -0.5f,  -0.5f,  0.0f, -1.0f,  0.0f,  1.0f,  1.0f,
+	 0.5f,  -0.5f,   0.5f,  0.0f, -1.0f,  0.0f,  1.0f,  0.0f,
+	 0.5f,  -0.5f,   0.5f,  0.0f, -1.0f,  0.0f,  1.0f,  0.0f,
+	-0.5f,  -0.5f,   0.5f,  0.0f, -1.0f,  0.0f,  0.0f,  0.0f,
+	-0.5f,  -0.5f,  -0.5f,  0.0f, -1.0f,  0.0f,  0.0f,  1.0f,
 
-	 0.0f,  1.0f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f,
-	 1.0f,  1.0f,  0.0f,  0.0f,  1.0f,  0.0f,  1.0f,  1.0f,
-	 1.0f,  1.0f,  1.0f,  0.0f,  1.0f,  0.0f,  1.0f,  0.0f,
-	 1.0f,  1.0f,  1.0f,  0.0f,  1.0f,  0.0f,  1.0f,  0.0f,
-	 0.0f,  1.0f,  1.0f,  0.0f,  1.0f,  0.0f,  0.0f,  0.0f,
-	 0.0f,  1.0f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f
+	-0.5f,   0.5f,  -0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f,
+	 0.5f,   0.5f,  -0.5f,  0.0f,  1.0f,  0.0f,  1.0f,  1.0f,
+	 0.5f,   0.5f,   0.5f,  0.0f,  1.0f,  0.0f,  1.0f,  0.0f,
+	 0.5f,   0.5f,   0.5f,  0.0f,  1.0f,  0.0f,  1.0f,  0.0f,
+	-0.5f,   0.5f,   0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  0.0f,
+	-0.5f,   0.5f,  -0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f
 };
 
 bool firstMouse = true;
@@ -82,12 +82,12 @@ int main()
 	Light light = Light(glm::vec3(1.5f, 1.5f, 1.5f),
 		glm::vec3(glm::radians(90.0f), glm::radians(90.0f), 0), glm::vec3(1.0f, 1.0f, 1.0f));
 	Shader shader("../Shader/proj1.vert", "../Shader/proj1.frag");
-	Mesh mesh(vertices, SIZEOF(vertices));
+	Mesh mesh(box_vertices, SIZEOF(box_vertices));
 	Material material(&shader, mesh.loadImageToGPU("../Textures/container2.png", GL_RGBA, GL_RGBA, 0),
 		mesh.loadImageToGPU("../Textures/container2_specular.png", GL_RGBA, GL_RGBA, 1),
 		glm::vec3(0.3f, 0.3f, 0.3f),
 		32.0f);
-	Model model("../Model/stray3.obj");
+	Model model("../Model/robot4/robot4.obj");
 
 	glm::mat4 modelMat = glm::mat4(1.0f);
 	glm::mat4 viewMat;
@@ -98,13 +98,28 @@ int main()
 	shader.use();
 	shader.setMat4("model", modelMat);
 
+	int mode = 1;
 	while (!glfwWindowShouldClose(window))
 	{
 		float currentFrame = glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
-		camera.processInput(window, deltaTime);
+		int temp = camera.processInput(window, deltaTime);
+		if (temp > 0)
+		{
+			if(mode != temp)
+				Transform::Idle();
+			mode = temp;
+		}
+
+		switch (mode)
+		{
+		case 1:
+			Transform::Idle();	break;
+		case 2:
+			Transform::Walk(deltaTime);	break;
+		}
 
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -127,10 +142,6 @@ int main()
 
 		mesh.draw(&shader);	//Draw Box
 		model.Draw(material.shader);	//Draw Model
-
-		Transform::trans["left_arm1_robot"] = Transform(glm::vec3(1.0f, 1.0f, 1.0f), glm::vec4(0.0, 1.0, 0.0f, glm::sin(glfwGetTime())), glm::vec3(3.5f, -22.5f, -0.9f));
-		Transform::trans["left_arm6_robot"] = Transform(glm::vec3(1.0f, 1.0f, 1.0f), glm::vec4(0.0, 1.0, 0.0f, glm::sin(2 * glfwGetTime())), glm::vec3(5.578f, -19.29f, -0.7438f));
-		Transform::trans["left_hand1_robot"] = Transform(glm::vec3(1.0f, 1.0f, 1.0f), glm::vec4(1.0, 0.0, 0.0f, glm::sin(3 * glfwGetTime())), glm::vec3(7.627f, -15.64f, -1.006f));
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
