@@ -141,8 +141,7 @@ int main()
 		shader.setVec3("cameraPos", camera.position);
 
 		mesh.draw(&shader);	//Draw Box
-		model2.draw(&shader);
-		//model.Draw(material.shader);	//Draw Model
+		model.Draw(material.shader);	//Draw Model
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
