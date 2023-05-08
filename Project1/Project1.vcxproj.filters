@@ -39,7 +39,7 @@
     <ClCompile Include="..\Source\Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Model2.cpp">
+    <ClCompile Include="..\Source\Transform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,7 +62,7 @@
     <ClInclude Include="..\Header\Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\Model2.h">
+    <ClInclude Include="..\Header\Transform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

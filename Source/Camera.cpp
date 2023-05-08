@@ -26,14 +26,14 @@ Camera::Camera(glm::vec3 position, float pitch, float yaw, glm::vec3 worldUp)
 	up = glm::normalize(glm::cross(right, forward));
 }
 
-void Camera::processInput(GLFWwindow* window, float deltaTime)
+int Camera::processInput(GLFWwindow* window, float deltaTime)
 {
 	float cameraSpeed = 2.5f * deltaTime;
 
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 	{
 		glfwSetWindowShouldClose(window, true);
-		return;
+		return -1;
 	}
 
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
@@ -50,6 +50,12 @@ void Camera::processInput(GLFWwindow* window, float deltaTime)
 		position += cameraSpeed * up;
 	else if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
 		position -= cameraSpeed * up;
+
+	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
+		return 1;
+	if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
+		return 2;
+	return 0;
 }
 
 glm::mat4 Camera::getViewMatrix()

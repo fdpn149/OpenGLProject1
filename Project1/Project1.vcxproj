@@ -163,6 +163,7 @@
     <ClCompile Include="..\Source\Model.cpp" />
     <ClCompile Include="..\Source\Model2.cpp" />
     <ClCompile Include="..\Source\Shader.cpp" />
+    <ClCompile Include="..\Source\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Header\Camera.h" />
@@ -172,6 +173,7 @@
     <ClInclude Include="..\Header\Model.h" />
     <ClInclude Include="..\Header\Model2.h" />
     <ClInclude Include="..\Header\Shader.h" />
+    <ClInclude Include="..\Header\Transform.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Shader\proj1.frag" />

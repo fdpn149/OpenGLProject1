@@ -1,5 +1,6 @@
 #include "../Header/Mesh.h"
 #include <STB/stb_image.h>
+#include "../Header/Transform.h"
 
 Mesh::Mesh(float vertices[], int size)
 {
@@ -47,9 +48,15 @@ void Mesh::setupMesh()
 	glBindVertexArray(0);
 }
 
-
 void Mesh::draw(Shader* shader)
 {
+	glm::mat4 modelMat = glm::mat4(1.0f);
+
+	Transform::HierarchyTrans(modelMat, node);
+
+	shader->use();
+	shader->setMat4("model", modelMat);
+
 	for (int i = 0; i < textures.size(); i++)
 	{
 		if (textures[i].type == "texture_diffuse")
