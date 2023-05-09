@@ -1,4 +1,4 @@
-#include "..\Header\Material.h"
+#include "Material.h"
 
 Material::Material()
 {}

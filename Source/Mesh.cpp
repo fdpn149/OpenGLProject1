@@ -1,6 +1,6 @@
-#include "../Header/Mesh.h"
+#include "Mesh.h"
 #include <STB/stb_image.h>
-#include "../Header/Transform.h"
+#include "Transform.h"
 
 Mesh::Mesh(float vertices[], int size)
 {

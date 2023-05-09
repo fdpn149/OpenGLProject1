@@ -1,4 +1,4 @@
-#include "../Header/Light.h"
+#include "Light.h"
 
 Light::Light(glm::vec3 _position, glm::vec3 _angles, glm::vec3 _color = glm::vec3(1.0f)) : position(_position), angles(_angles), color(_color)
 {

@@ -1,5 +1,5 @@
 #pragma warning(disable:4996)
-#include "../Header/Shader.h"
+#include "Shader.h"
 #include <GL/glew.h>
 #include <glm/gtc/type_ptr.hpp>
 

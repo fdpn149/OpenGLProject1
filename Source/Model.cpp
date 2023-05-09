@@ -1,5 +1,5 @@
-#include "../Header/Model.h"
-#include "../Include/STB/stb_image.h"
+#include "Model.h"
+#include <STB/stb_image.h>
 
 Model::Model(std::string path)
 {

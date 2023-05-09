@@ -5,12 +5,12 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <STB/stb_image.h>
-#include "../Header/Mesh.h"
-#include "../Header/Shader.h"
-#include "../Header/Camera.h"
-#include "../Header/Light.h"
-#include "../Header/Model.h"
-#include "../Header/Transform.h"
+#include "Mesh.h"
+#include "Shader.h"
+#include "Camera.h"
+#include "Light.h"
+#include "Model.h"
+#include "Transform.h"
 
 void initGLFW();
 GLFWwindow* initWindow();
@@ -115,6 +115,8 @@ int main()
 			Transform::Idle();	break;
 		case 2:
 			Transform::Walk(deltaTime);	break;
+		case 3:
+			Transform::Jump(deltaTime);	break;
 		}
 
 		glClearColor(0.0f, 0.125f, 0.25f, 1.0f);

@@ -1,4 +1,4 @@
-#include "../Header/Camera.h"
+#include "Camera.h"
 
 
 Camera::Camera(glm::vec3 position, glm::vec3 target, glm::vec3 worldUp)
@@ -55,6 +55,8 @@ int Camera::processInput(GLFWwindow* window, float deltaTime)
 		return 1;
 	if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
 		return 2;
+	if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
+		return 3;
 	return 0;
 }
 
