@@ -122,35 +122,46 @@ void Transform::Walk(float deltaTime)
 
 void Transform::Jump(float deltaTime)
 {
-	//TODO: Finish it
-	/*float angle;
+	float angle;
 	bool done = true;
 
 	switch (stage)
 	{
 	case 0:
 		angle = trans["right_arm"].rotate.w;
-		if (angle > glm::radians(-45.0f))
+		if (angle > glm::radians(-90.0f))
 		{
 			move("right_arm", glm::vec4(0.0f, 0.0f, 1.0f, (angle - speed * deltaTime)), glm::vec3(0.5631f, -3.63f, 0.2089f), glm::vec3(0, 0, 0));
 			done = false;
 		}
 		angle = trans["left_arm"].rotate.w;
-		if (angle < glm::radians(45.0f))
+		if (angle < glm::radians(90.0f))
 		{
 			move("left_arm", glm::vec4(0.0f, 0.0f, 1.0f, (angle + speed * deltaTime)), glm::vec3(-0.5631f, -3.63f, 0.2089f), glm::vec3(0, 0, 0));
 			done = false;
 		}
 		angle = trans["right_thigh"].rotate.w;
-		if (angle < glm::radians(45.0f))
+		if (angle > glm::radians(-30.0f))
 		{
-			move("right_thigh", glm::vec4(0.0f, 0.0f, 1.0f, (angle + speed * deltaTime)), glm::vec3(0.2835f, -2.176f, -0.00805f), glm::vec3(0, 0, 0));
+			move("right_thigh", glm::vec4(0.0f, 0.0f, 1.0f, (angle - speed / 2.5 * deltaTime)), glm::vec3(0.2835f, -2.176f, -0.00805f), glm::vec3(0, 0, 0));
 			done = false;
 		}
 		angle = trans["left_thigh"].rotate.w;
-		if (angle > glm::radians(-45.0f))
+		if (angle < glm::radians(30.0f))
 		{
-			move("left_thigh", glm::vec4(0.0f, 0.0f, 1.0f, (angle - speed * deltaTime)), glm::vec3(-0.2835f, -2.176f, -0.00805f), glm::vec3(0, 0, 0));
+			move("left_thigh", glm::vec4(0.0f, 0.0f, 1.0f, (angle + speed / 2.5 * deltaTime)), glm::vec3(-0.2835f, -2.176f, -0.00805f), glm::vec3(0, 0, 0));
+			done = false;
+		}
+		angle = trans["right_forearm"].rotate.w;
+		if (angle > glm::radians(-90.0f))
+		{
+			move("right_forearm", glm::vec4(0.0f, 0.0f, 1.0f, (angle - speed * deltaTime)), glm::vec3(0.8627f, -3.163f, 0.2554f), glm::vec3(0, 0, 0));
+			done = false;
+		}
+		angle = trans["left_forearm"].rotate.w;
+		if (angle < glm::radians(90.0f))
+		{
+			move("left_forearm", glm::vec4(0.0f, 0.0f, 1.0f, (angle + speed * deltaTime)), glm::vec3(-0.8627f, -3.163f, 0.2554f), glm::vec3(0, 0, 0));
 			done = false;
 		}
 		if (done)
@@ -158,31 +169,43 @@ void Transform::Jump(float deltaTime)
 		break;
 	case 1:
 		angle = trans["right_arm"].rotate.w;
-		if (angle < glm::radians(45.0f))
+		if (angle < glm::radians(0.0f))
 		{
 			move("right_arm", glm::vec4(0.0f, 0.0f, 1.0f, (angle + speed * deltaTime)), glm::vec3(0.5631f, -3.63f, 0.2089f), glm::vec3(0, 0, 0));
 			done = false;
 		}
 		angle = trans["left_arm"].rotate.w;
-		if (angle > glm::radians(-45.0f))
+		if (angle > glm::radians(-0.0f))
 		{
 			move("left_arm", glm::vec4(0.0f, 0.0f, 1.0f, (angle - speed * deltaTime)), glm::vec3(-0.5631f, -3.63f, 0.2089f), glm::vec3(0, 0, 0));
 			done = false;
 		}
 		angle = trans["right_thigh"].rotate.w;
-		if (angle > glm::radians(-45.0f))
+		if (angle < glm::radians(5.0f))
 		{
-			move("right_thigh", glm::vec4(0.0f, 0.0f, 1.0f, (angle - speed * deltaTime)), glm::vec3(0.2835f, -2.176f, -0.00805f), glm::vec3(0, 0, 0));
+			move("right_thigh", glm::vec4(0.0f, 0.0f, 1.0f, (angle + speed / 2.0 * deltaTime)), glm::vec3(0.2835f, -2.176f, -0.00805f), glm::vec3(0, 0, 0));
 			done = false;
 		}
 		angle = trans["left_thigh"].rotate.w;
-		if (angle < glm::radians(45.0f))
+		if (angle > glm::radians(-5.0f))
 		{
-			move("left_thigh", glm::vec4(0.0f, 0.0f, 1.0f, (angle + speed * deltaTime)), glm::vec3(-0.2835f, -2.176f, -0.00805f), glm::vec3(0, 0, 0));
+			move("left_thigh", glm::vec4(0.0f, 0.0f, 1.0f, (angle - speed / 2.0 * deltaTime)), glm::vec3(-0.2835f, -2.176f, -0.00805f), glm::vec3(0, 0, 0));
+			done = false;
+		}
+		angle = trans["right_forearm"].rotate.w;
+		if (angle < glm::radians(0.0f))
+		{
+			move("right_forearm", glm::vec4(0.0f, 0.0f, 1.0f, (angle + speed * deltaTime)), glm::vec3(0.8627f, -3.163f, 0.2554f), glm::vec3(0, 0, 0));
+			done = false;
+		}
+		angle = trans["left_forearm"].rotate.w;
+		if (angle > glm::radians(-0.0f))
+		{
+			move("left_forearm", glm::vec4(0.0f, 0.0f, 1.0f, (angle - speed * deltaTime)), glm::vec3(-0.8627f, -3.163f, 0.2554f), glm::vec3(0, 0, 0));
 			done = false;
 		}
 		if (done)
 			stage = 0;
 		break;
-	}*/
+	}
 }
