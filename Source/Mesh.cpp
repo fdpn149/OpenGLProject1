@@ -17,12 +17,12 @@ Mesh::Mesh(std::vector<Vertex> vertices)
 	setupMesh();
 }
 
-Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures)
+Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, Material material)
 {
 	mode = 1;
 	this->vertices = vertices;
 	this->indices = indices;
-	this->textures = textures;
+	this->material = material;
 	setupMesh();
 }
 
@@ -57,21 +57,10 @@ void Mesh::draw(Shader* shader)
 	shader->use();
 	shader->setMat4("model", modelMat);
 
-	for (int i = 0; i < textures.size(); i++)
-	{
-		if (textures[i].type == "texture_diffuse")
-		{
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, textures[i].id);
-			shader->setInt("material.diffuse", 0);
-		}
-		else if (textures[i].type == "texture_specular")
-		{
-			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_2D, textures[i].id);
-			shader->setInt("material.specular", 1);
-		}
-	}
+	shader->setVec3("material.ambient", material.ambient);
+	shader->setVec3("material.diffuse", material.diffuse);
+	shader->setVec3("material.specular", material.specular);
+	shader->setFloat("material.shininess", material.shininess);
 
 	glBindVertexArray(VAO);
 	switch (mode)
@@ -81,27 +70,4 @@ void Mesh::draw(Shader* shader)
 	}
 	glBindVertexArray(0);
 	glActiveTexture(GL_TEXTURE0);
-}
-
-GLuint Mesh::loadImageToGPU(const char* filename, GLint internalFormat, GLenum format, int textureSlot)
-{
-	GLuint TexBuffer;
-	glGenTextures(1, &TexBuffer);
-	glActiveTexture(GL_TEXTURE0 + textureSlot);
-	glBindTexture(GL_TEXTURE_2D, TexBuffer);
-
-	int width, height, nrChannels;
-	stbi_set_flip_vertically_on_load(true);
-	unsigned char* data = stbi_load(filename, &width, &height, &nrChannels, 0);
-	if (data)
-	{
-		glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, format, GL_UNSIGNED_BYTE, data);
-		glGenerateMipmap(GL_TEXTURE_2D);
-	}
-	else
-	{
-		printf("Failed to load texture\n");
-	}
-	stbi_image_free(data);
-	return TexBuffer;
 }

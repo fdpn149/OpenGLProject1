@@ -5,6 +5,7 @@
 #include <vector>
 #include "Shader.h"
 #include "Transform.h"
+#include "Material.h"
 
 struct Vertex
 {
@@ -13,29 +14,21 @@ struct Vertex
 	glm::vec2 texCoord;
 };
 
-struct Texture
-{
-	unsigned int id;
-	std::string type;
-	std::string path;
-};
-
 class Mesh
 {
 	unsigned int VAO, VBO, EBO;
 	int size;
 	int mode;
+	std::vector<Vertex> vertices;
+	std::vector<unsigned int> indices;
+	Material material;
 	void setupMesh();
 public:
 	Node* node = nullptr;
 	Transform transform;
 	Mesh(float vertices[], int size);
 	Mesh(std::vector<Vertex> vertices);
-	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures);
-	std::vector<Vertex> vertices;
-	std::vector<unsigned int> indices;
-	std::vector<Texture> textures;
+	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, Material material);
 	void draw(Shader* shader);
-	GLuint loadImageToGPU(const char* filename, GLint internalFormat, GLenum format, int textureSlot);
 };
 

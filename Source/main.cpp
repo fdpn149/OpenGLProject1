@@ -5,7 +5,6 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <STB/stb_image.h>
-#include "../Header/Material.h"
 #include "../Header/Mesh.h"
 #include "../Header/Shader.h"
 #include "../Header/Camera.h"
@@ -21,47 +20,47 @@ Camera camera(glm::vec3(0, 0, 3.0f), glm::radians(0.0f), glm::radians(0.0f), glm
 
 float box_vertices[] = {
 	// positions         // normals       // texture coords
-	-0.5f,  -0.5f,  -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
-	 0.5f,  -0.5f,  -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  0.0f,
-	 0.5f,   0.5f,  -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  1.0f,
-	 0.5f,   0.5f,  -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  1.0f,
-	-0.5f,   0.5f,  -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  1.0f,
-	-0.5f,  -0.5f,  -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
+	-0.05f,  -0.05f,  -0.05f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
+	 0.05f,  -0.05f,  -0.05f,  0.0f,  0.0f, -1.0f,  1.0f,  0.0f,
+	 0.05f,   0.05f,  -0.05f,  0.0f,  0.0f, -1.0f,  1.0f,  1.0f,
+	 0.05f,   0.05f,  -0.05f,  0.0f,  0.0f, -1.0f,  1.0f,  1.0f,
+	-0.05f,   0.05f,  -0.05f,  0.0f,  0.0f, -1.0f,  0.0f,  1.0f,
+	-0.05f,  -0.05f,  -0.05f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
 
-	-0.5f,  -0.5f,   0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,
-	 0.5f,  -0.5f,   0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  0.0f,
-	 0.5f,   0.5f,   0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f,
-	 0.5f,   0.5f,   0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f,
-	-0.5f,   0.5f,   0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  1.0f,
-	-0.5f,  -0.5f,   0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,
+	-0.05f,  -0.05f,   0.05f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,
+	 0.05f,  -0.05f,   0.05f,  0.0f,  0.0f,  1.0f,  1.0f,  0.0f,
+	 0.05f,   0.05f,   0.05f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f,
+	 0.05f,   0.05f,   0.05f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f,
+	-0.05f,   0.05f,   0.05f,  0.0f,  0.0f,  1.0f,  0.0f,  1.0f,
+	-0.05f,  -0.05f,   0.05f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f,
 
-	-0.5f,   0.5f,   0.5f, -1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
-	-0.5f,   0.5f,  -0.5f, -1.0f,  0.0f,  0.0f,  1.0f,  1.0f,
-	-0.5f,  -0.5f,  -0.5f, -1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
-	-0.5f,  -0.5f,  -0.5f, -1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
-	-0.5f,  -0.5f,   0.5f, -1.0f,  0.0f,  0.0f,  0.0f,  0.0f,
-	-0.5f,   0.5f,   0.5f, -1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
+	-0.05f,   0.05f,   0.05f, -1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
+	-0.05f,   0.05f,  -0.05f, -1.0f,  0.0f,  0.0f,  1.0f,  1.0f,
+	-0.05f,  -0.05f,  -0.05f, -1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
+	-0.05f,  -0.05f,  -0.05f, -1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
+	-0.05f,  -0.05f,   0.05f, -1.0f,  0.0f,  0.0f,  0.0f,  0.0f,
+	-0.05f,   0.05f,   0.05f, -1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
 
-	 0.5f,   0.5f,   0.5f,  1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
-	 0.5f,   0.5f,  -0.5f,  1.0f,  0.0f,  0.0f,  1.0f,  1.0f,
-	 0.5f,  -0.5f,  -0.5f,  1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
-	 0.5f,  -0.5f,  -0.5f,  1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
-	 0.5f,  -0.5f,   0.5f,  1.0f,  0.0f,  0.0f,  0.0f,  0.0f,
-	 0.5f,   0.5f,   0.5f,  1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
+	 0.05f,   0.05f,   0.05f,  1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
+	 0.05f,   0.05f,  -0.05f,  1.0f,  0.0f,  0.0f,  1.0f,  1.0f,
+	 0.05f,  -0.05f,  -0.05f,  1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
+	 0.05f,  -0.05f,  -0.05f,  1.0f,  0.0f,  0.0f,  0.0f,  1.0f,
+	 0.05f,  -0.05f,   0.05f,  1.0f,  0.0f,  0.0f,  0.0f,  0.0f,
+	 0.05f,   0.05f,   0.05f,  1.0f,  0.0f,  0.0f,  1.0f,  0.0f,
 
-	-0.5f,  -0.5f,  -0.5f,  0.0f, -1.0f,  0.0f,  0.0f,  1.0f,
-	 0.5f,  -0.5f,  -0.5f,  0.0f, -1.0f,  0.0f,  1.0f,  1.0f,
-	 0.5f,  -0.5f,   0.5f,  0.0f, -1.0f,  0.0f,  1.0f,  0.0f,
-	 0.5f,  -0.5f,   0.5f,  0.0f, -1.0f,  0.0f,  1.0f,  0.0f,
-	-0.5f,  -0.5f,   0.5f,  0.0f, -1.0f,  0.0f,  0.0f,  0.0f,
-	-0.5f,  -0.5f,  -0.5f,  0.0f, -1.0f,  0.0f,  0.0f,  1.0f,
+	-0.05f,  -0.05f,  -0.05f,  0.0f, -1.0f,  0.0f,  0.0f,  1.0f,
+	 0.05f,  -0.05f,  -0.05f,  0.0f, -1.0f,  0.0f,  1.0f,  1.0f,
+	 0.05f,  -0.05f,   0.05f,  0.0f, -1.0f,  0.0f,  1.0f,  0.0f,
+	 0.05f,  -0.05f,   0.05f,  0.0f, -1.0f,  0.0f,  1.0f,  0.0f,
+	-0.05f,  -0.05f,   0.05f,  0.0f, -1.0f,  0.0f,  0.0f,  0.0f,
+	-0.05f,  -0.05f,  -0.05f,  0.0f, -1.0f,  0.0f,  0.0f,  1.0f,
 
-	-0.5f,   0.5f,  -0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f,
-	 0.5f,   0.5f,  -0.5f,  0.0f,  1.0f,  0.0f,  1.0f,  1.0f,
-	 0.5f,   0.5f,   0.5f,  0.0f,  1.0f,  0.0f,  1.0f,  0.0f,
-	 0.5f,   0.5f,   0.5f,  0.0f,  1.0f,  0.0f,  1.0f,  0.0f,
-	-0.5f,   0.5f,   0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  0.0f,
-	-0.5f,   0.5f,  -0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f
+	-0.05f,   0.05f,  -0.05f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f,
+	 0.05f,   0.05f,  -0.05f,  0.0f,  1.0f,  0.0f,  1.0f,  1.0f,
+	 0.05f,   0.05f,   0.05f,  0.0f,  1.0f,  0.0f,  1.0f,  0.0f,
+	 0.05f,   0.05f,   0.05f,  0.0f,  1.0f,  0.0f,  1.0f,  0.0f,
+	-0.05f,   0.05f,   0.05f,  0.0f,  1.0f,  0.0f,  0.0f,  0.0f,
+	-0.05f,   0.05f,  -0.05f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f
 };
 
 bool firstMouse = true;
@@ -79,15 +78,12 @@ int main()
 
 	glEnable(GL_DEPTH_TEST);
 
-	Light light = Light(glm::vec3(1.5f, 1.5f, 1.5f),
-		glm::vec3(glm::radians(90.0f), glm::radians(90.0f), 0), glm::vec3(1.0f, 1.0f, 1.0f));
+	Light light = Light(glm::vec3(1.5f, 40.0f, 1.5f),
+		glm::vec3(glm::radians(90.0f), glm::radians(90.0f), 0), glm::vec3(2.0f, 2.0f, 2.0f));
 	Shader shader("../Shader/proj1.vert", "../Shader/proj1.frag");
 	Mesh mesh(box_vertices, SIZEOF(box_vertices));
-	Material material(&shader, mesh.loadImageToGPU("../Textures/container2.png", GL_RGBA, GL_RGBA, 0),
-		mesh.loadImageToGPU("../Textures/container2_specular.png", GL_RGBA, GL_RGBA, 1),
-		glm::vec3(0.3f, 0.3f, 0.3f),
-		32.0f);
-	Model model("../Model/robot4/robot4.obj");
+	Material material;
+	Model model("../Model/robot/robot.obj");
 
 	glm::mat4 modelMat = glm::mat4(1.0f);
 	glm::mat4 viewMat;
@@ -121,7 +117,7 @@ int main()
 			Transform::Walk(deltaTime);	break;
 		}
 
-		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClearColor(0.0f, 0.125f, 0.25f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		viewMat = camera.getViewMatrix();
@@ -133,15 +129,10 @@ int main()
 		shader.setVec3("light.pos", light.position);
 		shader.setVec3("light.color", light.color);
 
-		shader.setVec3("material.ambient", material.ambient);
-		shader.setInt("material.diffuse", 0);
-		shader.setInt("material.specular", 1);
-		shader.setFloat("material.shininess", 64.0f);
-
 		shader.setVec3("cameraPos", camera.position);
 
 		mesh.draw(&shader);	//Draw Box
-		model.Draw(material.shader);	//Draw Model
+		model.Draw(&shader);	//Draw Model
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

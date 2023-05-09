@@ -1,3 +1,19 @@
+newmtl pasted__robot4_armor_2_002
+illum 4
+Kd 0.08 0.08 0.05
+Ka 0.13 0.13 0.13
+Tf 1.00 1.00 1.00
+Ni 1.45
+Ks 0.50 0.50 0.50
+Ns 73.28
+newmtl pasted__robot4_base_001
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.22 0.22 0.22
+Tf 1.00 1.00 1.00
+Ni 1.45
+Ks 0.50 0.50 0.50
+Ns 128.40
 newmtl robot:armor
 illum 4
 Kd 0.01 0.02 0.03

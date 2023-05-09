@@ -62,56 +62,56 @@ void Transform::Walk(float deltaTime)
 	switch (stage)
 	{
 	case 0:
-		angle = trans["right_arm_base"].rotate.w;
+		angle = trans["right_arm"].rotate.w;
 		if (angle > glm::radians(-45.0f))
 		{
-			move("right_arm_base", glm::vec3(1.0f, 1.0f, 1.0f), glm::vec4(1.0, 0.0, 0.0f, (angle - speed * deltaTime)), glm::vec3(0.5631f, -3.63f, 0.2089f));
+			move("right_arm", glm::vec3(1.0f, 1.0f, 1.0f), glm::vec4(1.0, 0.0, 0.0f, (angle - speed * deltaTime)), glm::vec3(0.5631f, -3.63f, 0.2089f));
 			done = false;
 		}
-		angle = trans["left_arm_base"].rotate.w;
+		angle = trans["left_arm"].rotate.w;
 		if (angle < glm::radians(45.0f))
 		{
-			move("left_arm_base", glm::vec3(1.0f, 1.0f, 1.0f), glm::vec4(1.0, 0.0, 0.0f, (angle + speed * deltaTime)), glm::vec3(-0.5631f, -3.63f, 0.2089f));
+			move("left_arm", glm::vec3(1.0f, 1.0f, 1.0f), glm::vec4(1.0, 0.0, 0.0f, (angle + speed * deltaTime)), glm::vec3(-0.5631f, -3.63f, 0.2089f));
 			done = false;
 		}
-		angle = trans["right_thigh_armor"].rotate.w;
+		angle = trans["right_thigh"].rotate.w;
 		if (angle < glm::radians(45.0f))
 		{
-			move("right_thigh_armor", glm::vec3(1.0f, 1.0f, 1.0f), glm::vec4(1.0, 0.0, 0.0f, (angle + speed * deltaTime)), glm::vec3(0.2835f, -2.176f, -0.00805f));
+			move("right_thigh", glm::vec3(1.0f, 1.0f, 1.0f), glm::vec4(1.0, 0.0, 0.0f, (angle + speed * deltaTime)), glm::vec3(0.2835f, -2.176f, -0.00805f));
 			done = false;
 		}
-		angle = trans["left_thigh_armor"].rotate.w;
+		angle = trans["left_thigh"].rotate.w;
 		if (angle > glm::radians(-45.0f))
 		{
-			move("left_thigh_armor", glm::vec3(1.0f, 1.0f, 1.0f), glm::vec4(1.0, 0.0, 0.0f, (angle - speed * deltaTime)), glm::vec3(-0.2835f, -2.176f, -0.00805f));
+			move("left_thigh", glm::vec3(1.0f, 1.0f, 1.0f), glm::vec4(1.0, 0.0, 0.0f, (angle - speed * deltaTime)), glm::vec3(-0.2835f, -2.176f, -0.00805f));
 			done = false;
 		}
 		if (done)
 			stage = 1;
 		break;
 	case 1:
-		angle = trans["right_arm_base"].rotate.w;
+		angle = trans["right_arm"].rotate.w;
 		if (angle < glm::radians(45.0f))
 		{
-			move("right_arm_base", glm::vec3(1.0f, 1.0f, 1.0f), glm::vec4(1.0, 0.0, 0.0f, (angle + speed * deltaTime)), glm::vec3(0.5631f, -3.63f, 0.2089f));
+			move("right_arm", glm::vec3(1.0f, 1.0f, 1.0f), glm::vec4(1.0, 0.0, 0.0f, (angle + speed * deltaTime)), glm::vec3(0.5631f, -3.63f, 0.2089f));
 			done = false;
 		}
-		angle = trans["left_arm_base"].rotate.w;
+		angle = trans["left_arm"].rotate.w;
 		if (angle > glm::radians(-45.0f))
 		{
-			move("left_arm_base", glm::vec3(1.0f, 1.0f, 1.0f), glm::vec4(1.0, 0.0, 0.0f, (angle - speed * deltaTime)), glm::vec3(-0.5631f, -3.63f, 0.2089f));
+			move("left_arm", glm::vec3(1.0f, 1.0f, 1.0f), glm::vec4(1.0, 0.0, 0.0f, (angle - speed * deltaTime)), glm::vec3(-0.5631f, -3.63f, 0.2089f));
 			done = false;
 		}
-		angle = trans["right_thigh_armor"].rotate.w;
+		angle = trans["right_thigh"].rotate.w;
 		if (angle > glm::radians(-45.0f))
 		{
-			move("right_thigh_armor", glm::vec3(1.0f, 1.0f, 1.0f), glm::vec4(1.0, 0.0, 0.0f, (angle - speed * deltaTime)), glm::vec3(0.2835f, -2.176f, -0.00805f));
+			move("right_thigh", glm::vec3(1.0f, 1.0f, 1.0f), glm::vec4(1.0, 0.0, 0.0f, (angle - speed * deltaTime)), glm::vec3(0.2835f, -2.176f, -0.00805f));
 			done = false;
 		}
-		angle = trans["left_thigh_armor"].rotate.w;
+		angle = trans["left_thigh"].rotate.w;
 		if (angle < glm::radians(45.0f))
 		{
-			move("left_thigh_armor", glm::vec3(1.0f, 1.0f, 1.0f), glm::vec4(1.0, 0.0, 0.0f, (angle + speed * deltaTime)), glm::vec3(-0.2835f, -2.176f, -0.00805f));
+			move("left_thigh", glm::vec3(1.0f, 1.0f, 1.0f), glm::vec4(1.0, 0.0, 0.0f, (angle + speed * deltaTime)), glm::vec3(-0.2835f, -2.176f, -0.00805f));
 			done = false;
 		}
 		if (done)
