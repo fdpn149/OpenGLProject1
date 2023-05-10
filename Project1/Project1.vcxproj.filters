@@ -73,5 +73,13 @@
     <None Include="..\Shader\proj1.vert">
       <Filter>Shader Files</Filter>
     </None>
+    <None Include="..\Model\robot\robot.mtl">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="..\Model\robot\robot.obj">
+      <Filter>Resource Files</Filter>
+    </Object>
   </ItemGroup>
 </Project>

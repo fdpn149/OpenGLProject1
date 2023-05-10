@@ -178,8 +178,17 @@
     <ClInclude Include="..\Header\Transform.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Model\robot\robot.mtl" />
     <None Include="..\Shader\proj1.frag" />
     <None Include="..\Shader\proj1.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="..\Model\robot\robot.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </Object>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
