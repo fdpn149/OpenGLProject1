@@ -2,6 +2,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "Mesh.h"
 
+#include <iostream>
+
 std::map<std::string, Transform> Transform::trans;
 int Transform::stage = 0;
 float Transform::speed = 2.0f;

@@ -5,12 +5,15 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <STB/stb_image.h>
+
 #include "Mesh.h"
 #include "Shader.h"
 #include "Camera.h"
 #include "Light.h"
 #include "Model.h"
 #include "Transform.h"
+#include "WalkAnimation.h"
+
 
 void initGLFW();
 GLFWwindow* initWindow();
@@ -80,19 +83,29 @@ int main()
 
 	Light light = Light(glm::vec3(1.5f, 40.0f, 1.5f),
 		glm::vec3(glm::radians(90.0f), glm::radians(90.0f), 0), glm::vec3(2.0f, 2.0f, 2.0f));
+
 	Shader shader("../Shader/proj1.vert", "../Shader/proj1.frag");
+
 	Mesh mesh(box_vertices, SIZEOF(box_vertices));
+
 	Material material;
+
 	Model model("../Model/robot/robot.obj");
 
+	Animation* currentAnimation;
+
+	WalkAnimation walkAniamtion(model, 2.0f);
+	
+	currentAnimation = &walkAniamtion;
+		
 	glm::mat4 modelMat = glm::mat4(1.0f);
-	glm::mat4 viewMat;
-	glm::mat4 projMat;
-	projMat = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
 	modelMat = glm::translate(modelMat, glm::vec3(0.0f, 0, 0.0f));
 	modelMat = glm::scale(modelMat, glm::vec3(0.2, 0.2, 0.2));
+
+	glm::mat4 projMat;
+	projMat = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
+
 	shader.use();
-	shader.setMat4("model", modelMat);
 
 	int mode = 1;
 	while (!glfwWindowShouldClose(window))
@@ -101,31 +114,36 @@ int main()
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
-		int temp = camera.processInput(window, deltaTime);
-		if (temp > 0)
-		{
-			if(mode != temp)
-				Transform::Idle();
-			mode = temp;
-		}
+		camera.processInput(window, deltaTime);
 
-		switch (mode)
-		{
-		case 1:
-			Transform::Idle();	break;
-		case 2:
-			Transform::Walk(deltaTime);	break;
-		case 3:
-			Transform::Jump(deltaTime);	break;
-		}
+		//int temp = ;
+		//if (temp > 0)
+		//{
+		//	if(mode != temp)
+		//		Transform::Idle();
+		//	mode = temp;
+
+		//	std::cout << temp << std::endl;
+		//}
+
+		//switch (mode)
+		//{
+		//case 1:
+		//	Transform::Idle();	break;
+		//case 2:
+		//	Transform::Walk(deltaTime);	break;
+		//case 3:
+		//	Transform::Jump(deltaTime);	break;
+		//}
+
+		currentAnimation->Update(deltaTime);
+		model.updateTransforms(modelMat);
 
 		glClearColor(0.0f, 0.125f, 0.25f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		viewMat = camera.getViewMatrix();
-
 		shader.use();
-		shader.setMat4("view", viewMat);
+		shader.setMat4("view", camera.getViewMatrix());
 		shader.setMat4("projection", projMat);
 
 		shader.setVec3("light.pos", light.position);
@@ -133,12 +151,13 @@ int main()
 
 		shader.setVec3("cameraPos", camera.position);
 
-		mesh.draw(&shader);	//Draw Box
-		model.Draw(&shader);	//Draw Model
+		//mesh.draw(&shader);	//Draw Box
+		model.Draw(&shader); //Draw Model
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
+
 	glfwTerminate();
 	return 0;
 }

@@ -159,6 +159,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Source\Animation.cpp" />
     <ClCompile Include="..\Source\Camera.cpp" />
     <ClCompile Include="..\Source\Light.cpp" />
     <ClCompile Include="..\Source\main.cpp" />
@@ -167,8 +168,10 @@
     <ClCompile Include="..\Source\Model.cpp" />
     <ClCompile Include="..\Source\Shader.cpp" />
     <ClCompile Include="..\Source\Transform.cpp" />
+    <ClCompile Include="..\Source\WalkAnimation.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Header\Animation.h" />
     <ClInclude Include="..\Header\Camera.h" />
     <ClInclude Include="..\Header\Light.h" />
     <ClInclude Include="..\Header\Material.h" />
@@ -176,6 +179,7 @@
     <ClInclude Include="..\Header\Model.h" />
     <ClInclude Include="..\Header\Shader.h" />
     <ClInclude Include="..\Header\Transform.h" />
+    <ClInclude Include="..\Header\WalkAnimation.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Shader\proj1.frag" />

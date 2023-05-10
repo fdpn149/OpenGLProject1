@@ -24,6 +24,7 @@ class Mesh
 	Material material;
 	void setupMesh();
 public:
+	std::string componet;
 	Node* node = nullptr;
 	Transform transform;
 	Mesh(float vertices[], int size);
