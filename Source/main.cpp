@@ -95,10 +95,8 @@ int main()
 
 	Animation* currentAnimation;
 
-	WalkAnimation walkAnim(model, 2.0f);
-	JackpotAnimation jackpotAnim(model, 2.0f);
 	
-	currentAnimation = &walkAnim;
+	currentAnimation = new JackpotAnimation(model, 4.0f);
 		
 	glm::mat4 modelMat = glm::mat4(1.0f);
 	modelMat = glm::translate(modelMat, glm::vec3(0.0f, 0, 0.0f));
@@ -139,7 +137,6 @@ int main()
 		//}
 
 		currentAnimation->Update(deltaTime);
-		model.updateTransforms(modelMat);
 
 		glClearColor(0.0f, 0.125f, 0.25f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
