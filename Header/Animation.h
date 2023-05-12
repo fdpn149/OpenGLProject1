@@ -5,9 +5,8 @@
 class Animation
 {
 public:
-	Animation(Model& model, float speed)
-		:model(model), stage(0), speed(speed)
-	{}
+	Animation(Model& model, float speed);
+
 
 	virtual void Update(float deltaTime) = 0;
 
@@ -18,5 +17,14 @@ protected:
 	int stage;
 
 	float speed;
+
+	glm::vec3 rightArmOffset;
+	glm::vec3 leftArmOffset;
+
+	glm::vec3 rightThighOffset;
+	glm::vec3 leftThighOffset;
+
+	glm::vec3 rightForeArmOffset;
+	glm::vec3 leftForeArmOffset;
 };
 

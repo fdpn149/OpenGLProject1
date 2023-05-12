@@ -13,6 +13,7 @@
 #include "Model.h"
 #include "Transform.h"
 #include "WalkAnimation.h"
+#include "JackpotAnimation.h"
 
 
 void initGLFW();
@@ -94,9 +95,10 @@ int main()
 
 	Animation* currentAnimation;
 
-	WalkAnimation walkAniamtion(model, 2.0f);
+	WalkAnimation walkAnim(model, 2.0f);
+	JackpotAnimation jackpotAnim(model, 2.0f);
 	
-	currentAnimation = &walkAniamtion;
+	currentAnimation = &walkAnim;
 		
 	glm::mat4 modelMat = glm::mat4(1.0f);
 	modelMat = glm::translate(modelMat, glm::vec3(0.0f, 0, 0.0f));
@@ -151,7 +153,9 @@ int main()
 
 		shader.setVec3("cameraPos", camera.position);
 
-		//mesh.draw(&shader);	//Draw Box
+		shader.setMat4("model", glm::mat4(1.0f));
+		mesh.draw(&shader);	//Draw Box
+
 		model.Draw(&shader); //Draw Model
 
 		glfwSwapBuffers(window);

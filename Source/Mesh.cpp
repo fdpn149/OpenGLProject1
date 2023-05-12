@@ -55,6 +55,7 @@ void Mesh::draw(Shader* shader)
 	//Transform::HierarchyTrans(modelMat, node);
 
 	shader->use();
+
 	shader->setVec3("material.ambient", material.ambient);
 	shader->setVec3("material.diffuse", material.diffuse);
 	shader->setVec3("material.specular", material.specular);

@@ -9,14 +9,14 @@
 #include "Mesh.h"
 #include "Transform.h"
 
-struct NewNode
+struct TransformTreeNode
 {
 	std::string name;
 	Transform transform;
 		
 	glm::mat4 finalTransform;
 
-	std::vector<NewNode*> children;
+	std::vector<TransformTreeNode*> children;
 };
 
 class Model
@@ -24,20 +24,23 @@ class Model
 public:
 	Model(std::string path);
 	~Model();
-	std::map<std::string, Node*> inherit;
-	std::vector<Mesh> meshes;
-	std::string directory;
-	std::unordered_map<std::string, NewNode*> componetMap;
+
+	//std::map<std::string, Node*> inherit;
+	//std::string directory;
+
+	std::unordered_map<std::string, TransformTreeNode*> componetMap;
+	void Draw(Shader* shader);
 
 	void updateTransforms(const glm::mat4 modelMat);
-	void readNodeHierachy(NewNode* node, const glm::mat4 parentTransform);
 
-	void Draw(Shader* shader);
 private:
 	void loadModel(std::string path);
 	void processNode(aiNode* node, const aiScene* scene);
 	Mesh processMesh(aiMesh* mesh, const aiScene* scene);
 
-	NewNode* tree;
+	void readNodeHierachy(TransformTreeNode* node, const glm::mat4 parentTransform);
+
+	std::vector<Mesh> meshes;
+	TransformTreeNode* tree;
 };
 

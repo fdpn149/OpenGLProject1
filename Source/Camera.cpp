@@ -57,6 +57,7 @@ int Camera::processInput(GLFWwindow* window, float deltaTime)
 		return 2;
 	if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
 		return 3;
+
 	return 0;
 }
 

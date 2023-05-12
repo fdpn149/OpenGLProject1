@@ -13,10 +13,10 @@ Model::Model(std::string path)
 
 Model::~Model()
 {
-	for (auto i : inherit)
-	{
-		delete i.second;
-	}
+	//for (auto i : inherit)
+	//{
+	//	delete i.second;
+	//}
 }
 
 void Model::updateTransforms(const glm::mat4 modelMat)
@@ -24,14 +24,15 @@ void Model::updateTransforms(const glm::mat4 modelMat)
 	readNodeHierachy(tree, modelMat);
 }
 
-
-void Model::readNodeHierachy(NewNode* node, const glm::mat4 parentTransform)
+void Model::readNodeHierachy(TransformTreeNode* node, const glm::mat4 parentTransform)
 {
+	// calculate final transform with parent transform
 	node->finalTransform = glm::translate(parentTransform, node->transform.translate);
 	node->finalTransform = glm::translate(node->finalTransform, -node->transform.offset);
 	node->finalTransform = glm::rotate(node->finalTransform, node->transform.rotate.w, glm::vec3(node->transform.rotate));
 	node->finalTransform = glm::translate(node->finalTransform, node->transform.offset);
 
+	// perform all tree node
 	for (int iii = 0; iii < node->children.size(); ++iii)
 	{
 		readNodeHierachy(node->children[iii], node->finalTransform);
@@ -62,7 +63,6 @@ void Model::loadModel(std::string path)
 		return;
 	}
 
-	directory = path.substr(0, path.find_last_of('/'));
 	processNode(scene->mRootNode, scene);
 }
 
@@ -73,27 +73,26 @@ void Model::processNode(aiNode* node, const aiScene* scene)
 
 	int count = std::count(name.begin(), name.end(), ':');
 
+	std::string componetName;
+
 	if (count > 0)
 	{
 		std::stringstream sstream(name);
 
-		NewNode* currentNode = tree;
+		TransformTreeNode* currentNode = tree;
 
 		while (!sstream.eof())
 		{
-			std::string componetName;
 			sstream >> componetName;
 
 			componetName = componetName.substr(6);
-
-			std::cout << componetName << std::endl;
 
 			// handle robot base
 			if (componetName == "body_base")
 			{
 				if (currentNode == nullptr)
 				{
-					currentNode = new NewNode({ componetName, Transform(), {} });
+					currentNode = new TransformTreeNode({ componetName, Transform(), {} });
 
 					tree = currentNode;
 
@@ -104,7 +103,7 @@ void Model::processNode(aiNode* node, const aiScene* scene)
 			{
 				bool found = false;
 
-				NewNode* nextNode = nullptr;
+				TransformTreeNode* nextNode = nullptr;
 
 				// find if componet already exit
 				for (auto it = currentNode->children.begin(); it < currentNode->children.end(); ++it)
@@ -124,7 +123,7 @@ void Model::processNode(aiNode* node, const aiScene* scene)
 				// add new componet
 				else
 				{
-					NewNode* newNode = new NewNode({ componetName, Transform(), {} });
+					TransformTreeNode* newNode = new TransformTreeNode({ componetName, Transform(), {} });
 
 					currentNode->children.push_back(newNode);
 
@@ -135,36 +134,36 @@ void Model::processNode(aiNode* node, const aiScene* scene)
 
 		}
 
-		unsigned int index = name.find_last_of(':');
-		name = name.substr(index + 1, name.length() - 1);
-		inherit[name] = new Node({ name, nullptr });
+		//unsigned int index = name.find_last_of(':');
+		//name = name.substr(index + 1, name.length() - 1);
+		//inherit[name] = new Node({ name, nullptr });
 
-		if (count > 1)
-		{
-			std::string current = name;
-			name = node->mName.C_Str();
-			name = name.substr(0, index);
+		//if (count > 1)
+		//{
+		//	std::string current = name;
+		//	name = node->mName.C_Str();
+		//	name = name.substr(0, index);
 
-			index = name.find_last_of(':');
-			unsigned int index2 = name.find_last_of(' ');
-			name = name.substr(index + 1, index2 - index - 1);
-			inherit[current]->parent = inherit[name];
-			name = current;
-		}
+		//	index = name.find_last_of(':');
+		//	unsigned int index2 = name.find_last_of(' ');
+		//	name = name.substr(index + 1, index2 - index - 1);
+		//	inherit[current]->parent = inherit[name];
+		//	name = current;
+		//}
 
-		Transform::trans[name]; //?
+		//Transform::trans[name]; 
 	}
 
 	for (GLuint i = 0; i < node->mNumMeshes; i++)
 	{
 		aiMesh* curMesh = scene->mMeshes[node->mMeshes[i]];
 		Mesh newMesh = processMesh(curMesh, scene);
-		if (inherit.find(name) != inherit.end())
-		{
-			newMesh.node = inherit[name];
-			newMesh.componet = name;
-		}
+		//if (inherit.find(name) != inherit.end())
+		//{
+		//	newMesh.node = inherit[name];
+		//}
 
+		newMesh.componet = componetName;
 		meshes.push_back(newMesh);
 	}
 
