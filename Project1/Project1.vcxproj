@@ -168,6 +168,7 @@
     <ClCompile Include="..\Source\Mesh.cpp" />
     <ClCompile Include="..\Source\Model.cpp" />
     <ClCompile Include="..\Source\Shader.cpp" />
+    <ClCompile Include="..\Source\SquatAnimation.cpp" />
     <ClCompile Include="..\Source\Transform.cpp" />
     <ClCompile Include="..\Source\WalkAnimation.cpp" />
   </ItemGroup>
@@ -180,6 +181,7 @@
     <ClInclude Include="..\Header\Mesh.h" />
     <ClInclude Include="..\Header\Model.h" />
     <ClInclude Include="..\Header\Shader.h" />
+    <ClInclude Include="..\Header\SquatAnimation.h" />
     <ClInclude Include="..\Header\Transform.h" />
     <ClInclude Include="..\Header\WalkAnimation.h" />
   </ItemGroup>
