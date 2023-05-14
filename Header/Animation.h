@@ -8,7 +8,7 @@ public:
 	Animation(Model& model, float speed);
 
 
-	virtual void Update(float deltaTime) = 0;
+	virtual void update(float deltaTime) = 0;
 
 
 protected:
@@ -26,5 +26,8 @@ protected:
 
 	glm::vec3 rightForeArmOffset;
 	glm::vec3 leftForeArmOffset;
+
+	glm::vec3 rightKneeOffset;
+	glm::vec3 leftKneeOffset;
 };
 

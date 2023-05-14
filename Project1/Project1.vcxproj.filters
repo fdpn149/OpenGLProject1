@@ -16,6 +16,12 @@
     <Filter Include="Shader Files">
       <UniqueIdentifier>{d10eb2d2-3d21-4896-b34c-d9c1f684e251}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Animations">
+      <UniqueIdentifier>{783ea884-757e-4e0d-8220-e0ef9d3901cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Animations">
+      <UniqueIdentifier>{78acf175-c33c-42ab-9274-8e6eed5d5dcb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\main.cpp">
@@ -42,14 +48,17 @@
     <ClCompile Include="..\Source\Transform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\WalkAnimation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\Animation.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Animations</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\JackpotAnimation.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\MoonWalkAnimation.cpp">
+      <Filter>Source Files\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\WalkAnimation.cpp">
+      <Filter>Source Files\Animations</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -74,14 +83,17 @@
     <ClInclude Include="..\Header\Transform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Header\WalkAnimation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Header\Animation.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Animations</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\JackpotAnimation.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\MoonWalkAnimation.h">
+      <Filter>Header Files\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\WalkAnimation.h">
+      <Filter>Header Files\Animations</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

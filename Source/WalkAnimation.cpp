@@ -1,6 +1,6 @@
 #include "WalkAnimation.h"
 
-void WalkAnimation::Update(float deltaTime)
+void WalkAnimation::update(float deltaTime)
 {
 	// right arm
 	setRightArmTrans(deltaTime);
@@ -13,6 +13,8 @@ void WalkAnimation::Update(float deltaTime)
 	
 	// left thigh
 	setLeftThighTrans(deltaTime);
+
+	model.updateTransforms(glm::mat4(1.0f));
 }
 
 void WalkAnimation::rotateComponetByAngle(std::string componet, glm::vec3 offset, float radians)

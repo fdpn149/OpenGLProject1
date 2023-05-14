@@ -11,4 +11,7 @@ Animation::Animation(Model& model, float speed)
 
 	rightForeArmOffset = glm::vec3(0.8627f, -3.163f, 0.2554f);
 	leftForeArmOffset = glm::vec3(-0.8627f, -3.163f, 0.2554f);
+
+	rightKneeOffset = glm::vec3(0.3f, -1.48f, 0.0f);
+	leftKneeOffset = glm::vec3(-0.3f, -1.48f, 0.0f);
 }
