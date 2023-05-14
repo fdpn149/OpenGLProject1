@@ -9,7 +9,6 @@ void SquatAnimation::Update(float deltaTime)
 	setRightFootTrans(deltaTime);
 	setLeftFootTrans(deltaTime);
 
-
 	model.updateTransforms(glm::mat4(1.0f));
 }
 
@@ -20,16 +19,18 @@ void SquatAnimation::setBodyTrans(float deltaTime)
 	float angle = model.componetMap["body_base"]->transform.rotate.w;
 	glm::vec3 pos = model.componetMap["body_base"]->transform.translate;
 
-	Transform newTrans(glm::vec4(1.0f, 0.0f, 0.0f, (angle + direction * speed * 0.25 * deltaTime)), bodyOffset, (glm::vec3(0, (pos.y + 1.4482f * 0.25f * deltaTime * speed * -direction), (pos.z + 0.7516f * 0.25f * deltaTime * speed * -direction))));
+	Transform newTrans(glm::vec4(1.0f, 0.0f, 0.0f, (angle + direction * speed * 0.25 * deltaTime)), bodyOffset, (glm::vec3(0, (pos.y - 1.4482f * deltaTime * speed * direction *0.475f), (pos.z - 0.7516f * deltaTime * speed * direction *0.477f))));
 
 	model.componetMap["body_base"]->transform = newTrans;
 
 	if (angle < glm::radians(0.0f) && direction == -1)
 	{
+		printf("%f, %f, %f\n", newTrans.translate.x, newTrans.translate.y, newTrans.translate.z);
 		direction = 1;
 	}
 	else if (angle > glm::radians(30.0f) && direction == 1)
 	{
+		printf("%f, %f, %f\n", newTrans.translate.x,newTrans.translate.y, newTrans.translate.z);
 		direction = -1;
 	}
 }
