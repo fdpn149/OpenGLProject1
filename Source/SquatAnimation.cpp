@@ -18,19 +18,19 @@ void SquatAnimation::setBodyTrans(float deltaTime)
 
 	float angle = model.componetMap["body_base"]->transform.rotate.w;
 	glm::vec3 pos = model.componetMap["body_base"]->transform.translate;
-
-	Transform newTrans(glm::vec4(1.0f, 0.0f, 0.0f, (angle + direction * speed * 0.25 * deltaTime)), bodyOffset, (glm::vec3(0, (pos.y - 1.4482f * deltaTime * speed * direction *0.475f), (pos.z - 0.7516f * deltaTime * speed * direction *0.477f))));
-
+	
+	const float WAIST = 2.704244f;
+	const float KNEE = 1.35f;
+	const float FOOT = 0.45f;
+	Transform newTrans(glm::vec4(1.0f, 0.0f, 0.0f, (angle + direction * speed * 0.25f * deltaTime)), bodyOffset, (glm::vec3(0, (-WAIST * (1.0f - glm::cos(3 * angle)) + KNEE * (glm::cos(angle) - glm::cos(3 * angle)) + FOOT * (1-glm::cos(angle))),(-WAIST * (glm::sin(3 * angle)) + KNEE * (glm::sin(angle) + glm::sin(angle * 3)) - FOOT * glm::sin(FOOT)))));
 	model.componetMap["body_base"]->transform = newTrans;
 
 	if (angle < glm::radians(0.0f) && direction == -1)
 	{
-		printf("%f, %f, %f\n", newTrans.translate.x, newTrans.translate.y, newTrans.translate.z);
 		direction = 1;
 	}
 	else if (angle > glm::radians(30.0f) && direction == 1)
 	{
-		printf("%f, %f, %f\n", newTrans.translate.x,newTrans.translate.y, newTrans.translate.z);
 		direction = -1;
 	}
 }
