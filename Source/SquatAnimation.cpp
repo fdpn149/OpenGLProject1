@@ -1,6 +1,6 @@
 #include "SquatAnimation.h"
 
-void SquatAnimation::Update(float deltaTime)
+void SquatAnimation::update(float deltaTime)
 {
 	setBodyTrans(deltaTime);
 	setWaistBaseTrans(deltaTime);

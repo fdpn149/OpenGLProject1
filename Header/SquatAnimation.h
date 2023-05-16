@@ -8,7 +8,7 @@ public:
 	{
 		stage = 0;
 	}
-	virtual void Update(float deltaTime) override;
+	virtual void update(float deltaTime) override;
 
 private:
 	void setBodyTrans(float deltaTime);
