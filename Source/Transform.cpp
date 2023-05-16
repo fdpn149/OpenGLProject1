@@ -22,6 +22,13 @@ Transform::Transform(glm::vec4 rotate, glm::vec3 offset, glm::vec3 translate)
 	this->translate = translate;
 }
 
+void Transform::set(glm::vec4 rotate, glm::vec3 offset, glm::vec3 translate)
+{
+	this->rotate = rotate;
+	this->offset = offset;
+	this->translate = translate;
+}
+
 //void Transform::HierarchyTrans(glm::mat4& modelMat, Node* node)
 //{
 //	if (node != nullptr)

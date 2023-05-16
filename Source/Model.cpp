@@ -45,7 +45,7 @@ void Model::Draw(Shader* shader)
 	{
 		shader->use();
 		shader->setMat4("model", componetMap[meshes[i].componet]->finalTransform);
-
+		if (meshes[i].componet == "body_base");
 		meshes[i].draw(shader);
 	}
 }

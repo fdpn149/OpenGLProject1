@@ -24,6 +24,8 @@ public:
 	Transform();
 	Transform(glm::vec4 rotate, glm::vec3 offset, glm::vec3 translate);
 
+	void set(glm::vec4 rotate, glm::vec3 offset, glm::vec3 translate);
+
 	//static void HierarchyTrans(glm::mat4& modelMat, Node* node);
 	//static void Idle();
 	//static void Walk(float deltaTime);
