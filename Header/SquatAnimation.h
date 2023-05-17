@@ -17,5 +17,10 @@ private:
 	void setLeftKneeTrans(float deltaTime);
 	void setRightFootTrans(float deltaTime);
 	void setLeftFootTrans(float deltaTime);
+
+	void setRightArmTrans(float deltaTime);
+	void setLeftArmTrans(float deltaTime);
+	void setRightForeArmTrans(float deltaTime);
+	void setLeftForeArmTrans(float deltaTime);
 };
 
