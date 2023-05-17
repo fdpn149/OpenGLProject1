@@ -9,6 +9,11 @@ void SquatAnimation::update(const float& deltaTime)
 	setRightFootTrans(deltaTime);
 	setLeftFootTrans(deltaTime);
 
+	setRightArmTrans(deltaTime);
+	setLeftArmTrans(deltaTime);
+	setRightForeArmTrans(deltaTime);
+	setLeftForeArmTrans(deltaTime);
+
 	model.updateTransforms(glm::mat4(1.0f));
 }
 
@@ -130,6 +135,86 @@ void SquatAnimation::setLeftFootTrans(float deltaTime)
 		direction = 1;
 	}
 	else if (angle > glm::radians(0.0f) && direction == 1)
+	{
+		direction = -1;
+	}
+}
+
+void SquatAnimation::setRightArmTrans(float deltaTime)
+{
+	static int direction = -1;
+
+	float angle = model.componetMap["right_arm"]->transform.rotate.w;
+
+	Transform newTrans(glm::vec4(1.0f, 0.0f, 0.0f, (angle + direction * speed * 0.75f * deltaTime)), rightArmOffset, glm::vec3(0, 0, 0));
+
+	model.componetMap["right_arm"]->transform = newTrans;
+
+	if (angle < glm::radians(-90.0f) && direction == -1)
+	{
+		direction = 1;
+	}
+	else if (angle > glm::radians(0.0f) && direction == 1)
+	{
+		direction = -1;
+	}
+}
+
+void SquatAnimation::setLeftArmTrans(float deltaTime)
+{
+	static int direction = -1;
+
+	float angle = model.componetMap["left_arm"]->transform.rotate.w;
+
+	Transform newTrans(glm::vec4(1.0f, 0.0f, 0.0f, (angle + direction * speed * 0.75f * deltaTime)), rightArmOffset, glm::vec3(0, 0, 0));
+
+	model.componetMap["left_arm"]->transform = newTrans;
+
+	if (angle < glm::radians(-90.0f) && direction == -1)
+	{
+		direction = 1;
+	}
+	else if (angle > glm::radians(0.0f) && direction == 1)
+	{
+		direction = -1;
+	}
+}
+
+void SquatAnimation::setRightForeArmTrans(float deltaTime)
+{
+	static int direction = -1;
+
+	float angle = model.componetMap["right_forearm"]->transform.rotate.w;
+
+	Transform newTrans(glm::vec4(0.0f, -0.3f, -0.6f, (angle + direction * speed * 0.33f * deltaTime)), rightForeArmOffset, glm::vec3(0, 0, 0));
+
+	model.componetMap["right_forearm"]->transform = newTrans;
+
+	if (angle < glm::radians(-40.0f) && direction == -1)
+	{
+		direction = 1;
+	}
+	else if (angle > glm::radians(0.0f) && direction == 1)
+	{
+		direction = -1;
+	}
+}
+
+void SquatAnimation::setLeftForeArmTrans(float deltaTime)
+{
+	static int direction = 1;
+
+	float angle = model.componetMap["left_forearm"]->transform.rotate.w;
+
+	Transform newTrans(glm::vec4(0.0f, -0.3f, -0.6f, (angle + direction * speed * 0.33f * deltaTime)), leftForeArmOffset, glm::vec3(0, 0, 0));
+
+	model.componetMap["left_forearm"]->transform = newTrans;
+
+	if (angle < glm::radians(0.0f) && direction == -1)
+	{
+		direction = 1;
+	}
+	else if (angle > glm::radians(40.0f) && direction == 1)
 	{
 		direction = -1;
 	}

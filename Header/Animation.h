@@ -14,8 +14,6 @@ public:
 protected:
 	Model& model;
 
-	int stage;
-
 	float speed;
 	glm::vec3 bodyOffset;
 

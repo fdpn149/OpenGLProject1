@@ -1,7 +1,7 @@
 #include "Animation.h"
 
 Animation::Animation(Model& model, float speed)
-	:model(model), stage(0), speed(speed)
+	:model(model), speed(speed)
 {
 	bodyOffset = glm::vec3(0.0f, -2.56f, 0.0f);
 
