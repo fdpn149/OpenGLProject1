@@ -33,7 +33,7 @@ JackpotAnimation::JackpotAnimation(Model& model, float speed)
 	model.componetMap["left_thigh"]->transform = trans;
 }
 
-void JackpotAnimation::update(float deltaTime)
+void JackpotAnimation::update(const float& deltaTime)
 {
 	setRightArmTrans(deltaTime);
 	setLeftArmTrans(deltaTime);

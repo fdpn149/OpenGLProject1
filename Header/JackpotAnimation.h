@@ -8,7 +8,7 @@ public:
 	JackpotAnimation(Model& model, float speed);
 
 
-	virtual void update(float deltaTime) override;
+	virtual void update(const float& deltaTime) override;
 
 private:
 	glm::mat4 getModel(float deltaTime);

@@ -11,7 +11,7 @@ public:
 	{
 	}
 
-	virtual void update(float deltaTime) override;
+	virtual void update(const float& deltaTime) override;
 
 private:
 	void rotateComponetByAngle(std::string componet, glm::vec3 offset, float radians);

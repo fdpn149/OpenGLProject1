@@ -2,13 +2,9 @@
 #include "Animation.h"
 class SquatAnimation : public Animation
 {
-	int stage;
 public:
-	SquatAnimation(Model& model, float speed) : Animation(model, speed)
-	{
-		stage = 0;
-	}
-	virtual void update(float deltaTime) override;
+	SquatAnimation(Model& model, float speed) : Animation(model, speed){}
+	virtual void update(const float& deltaTime) override;
 
 private:
 	void setBodyTrans(float deltaTime);

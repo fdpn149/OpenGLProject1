@@ -1,6 +1,6 @@
 #include "WalkAnimation.h"
 
-void WalkAnimation::update(float deltaTime)
+void WalkAnimation::update(const float& deltaTime)
 {
 	// right arm
 	setRightArmTrans(deltaTime);

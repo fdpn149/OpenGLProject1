@@ -63,6 +63,9 @@
     <ClCompile Include="..\Source\SquatAnimation.cpp">
       <Filter>Source Files\Animations</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\SitupAnimation.cpp">
+      <Filter>Source Files\Animations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Header\Mesh.h">
@@ -99,6 +102,9 @@
       <Filter>Header Files\Animations</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\SquatAnimation.h">
+      <Filter>Header Files\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\SitupAnimation.h">
       <Filter>Header Files\Animations</Filter>
     </ClInclude>
   </ItemGroup>

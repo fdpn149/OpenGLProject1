@@ -1,6 +1,6 @@
 #include "MoonWalkAnimation.h"
 
-void MoonWalkAnimation::update(float deltaTime)
+void MoonWalkAnimation::update(const float& deltaTime)
 {
 	setRightLeg(deltaTime);
 	setLeftLeg(deltaTime);

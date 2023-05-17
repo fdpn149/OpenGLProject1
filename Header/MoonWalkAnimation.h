@@ -11,7 +11,7 @@ public:
 		modelMat = glm::mat4(1.0f);
 	}
 
-	void update(float deltaTime) override;
+	void update(const float& deltaTime) override;
 
 private: 
 	void setRightLeg(float deltaTime);
