@@ -17,6 +17,7 @@
 #include "SquatAnimation.h"
 #include "MoonWalkAnimation.h"
 #include "SitupAnimation.h"
+#include "PushUpAnimation.h"
 
 void initGLFW();
 GLFWwindow* initWindow();
@@ -96,7 +97,7 @@ int main()
 	Animation* currentAnimation;
 
 	
-	currentAnimation = new SitupAnimation(model, 1.0f);
+	currentAnimation = new PushUpAnimation(model, 1.0f);
 		
 	glm::mat4 modelMat = glm::mat4(1.0f);
 	modelMat = glm::translate(modelMat, glm::vec3(0.0f, 0, 0.0f));
