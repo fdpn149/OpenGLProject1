@@ -169,6 +169,7 @@
     <ClCompile Include="..\Source\Mesh.cpp" />
     <ClCompile Include="..\Source\Model.cpp" />
     <ClCompile Include="..\Source\MoonWalkAnimation.cpp" />
+    <ClCompile Include="..\Source\PushUpAnimation.cpp" />
     <ClCompile Include="..\Source\Shader.cpp" />
     <ClCompile Include="..\Source\SitupAnimation.cpp" />
     <ClCompile Include="..\Source\SquatAnimation.cpp" />
@@ -185,6 +186,7 @@
     <ClInclude Include="..\Header\Mesh.h" />
     <ClInclude Include="..\Header\Model.h" />
     <ClInclude Include="..\Header\MoonWalkAnimation.h" />
+    <ClInclude Include="..\Header\PushUpAnimation.h" />
     <ClInclude Include="..\Header\Shader.h" />
     <ClInclude Include="..\Header\SitupAnimation.h" />
     <ClInclude Include="..\Header\SquatAnimation.h" />

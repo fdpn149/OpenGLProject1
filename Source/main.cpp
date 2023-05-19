@@ -17,6 +17,7 @@
 #include "SquatAnimation.h"
 #include "MoonWalkAnimation.h"
 #include "SitupAnimation.h"
+#include "PushUpAnimation.h"
 #include "GangnamAnimation.h"
 
 void initGLFW();

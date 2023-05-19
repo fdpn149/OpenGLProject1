@@ -66,6 +66,9 @@
     <ClCompile Include="..\Source\SitupAnimation.cpp">
       <Filter>Source Files\Animations</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\PushUpAnimation.cpp">
+      <Filter>Source Files\Animations</Filter>
+    </ClCompile>
     <ClCompile Include="..\Source\GangnamAnimation.cpp">
       <Filter>Source Files\Animations</Filter>
     </ClCompile>
@@ -108,6 +111,9 @@
       <Filter>Header Files\Animations</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\SitupAnimation.h">
+      <Filter>Header Files\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Header\PushUpAnimation.h">
       <Filter>Header Files\Animations</Filter>
     </ClInclude>
     <ClInclude Include="..\Header\GangnamAnimation.h">
