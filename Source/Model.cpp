@@ -11,14 +11,6 @@ Model::Model(std::string path)
 	loadModel(path);
 }
 
-Model::~Model()
-{
-	//for (auto i : inherit)
-	//{
-	//	delete i.second;
-	//}
-}
-
 void Model::updateTransforms(const glm::mat4 modelMat)
 {
 	readNodeHierachy(tree, modelMat);
@@ -129,41 +121,17 @@ void Model::processNode(aiNode* node, const aiScene* scene)
 
 					componetMap.insert({ componetName, newNode });
 				}
-
 			}
-
 		}
-
-		//unsigned int index = name.find_last_of(':');
-		//name = name.substr(index + 1, name.length() - 1);
-		//inherit[name] = new Node({ name, nullptr });
-
-		//if (count > 1)
-		//{
-		//	std::string current = name;
-		//	name = node->mName.C_Str();
-		//	name = name.substr(0, index);
-
-		//	index = name.find_last_of(':');
-		//	unsigned int index2 = name.find_last_of(' ');
-		//	name = name.substr(index + 1, index2 - index - 1);
-		//	inherit[current]->parent = inherit[name];
-		//	name = current;
-		//}
-
-		//Transform::trans[name]; 
 	}
 
 	for (GLuint i = 0; i < node->mNumMeshes; i++)
 	{
 		aiMesh* curMesh = scene->mMeshes[node->mMeshes[i]];
-		Mesh newMesh = processMesh(curMesh, scene);
-		//if (inherit.find(name) != inherit.end())
-		//{
-		//	newMesh.node = inherit[name];
-		//}
 
+		Mesh newMesh = processMesh(curMesh, scene);
 		newMesh.componet = componetName;
+
 		meshes.push_back(newMesh);
 	}
 

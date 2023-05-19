@@ -71,8 +71,6 @@ float box_vertices[] = {
 	-0.5f,   0.05f,  -0.05f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f
 };
 
-bool firstMouse = true;
-
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
@@ -96,8 +94,6 @@ int main()
 	Model model("../Model/robot/robot.obj");
 
 	Animation* currentAnimation;
-
-	
 	currentAnimation = new GangnamAnimation(model, 2.0f);
 		
 	glm::mat4 modelMat = glm::mat4(1.0f);
@@ -111,49 +107,37 @@ int main()
 	int mode = 1;
 	while (!glfwWindowShouldClose(window))
 	{
+		// process time
 		float currentFrame = glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
+		// process input
 		camera.processInput(window, deltaTime);
 
-		//int temp = ;
-		//if (temp > 0)
-		//{
-		//	if(mode != temp)
-		//		Transform::Idle();
-		//	mode = temp;
-
-		//	std::cout << temp << std::endl;
-		//}
-
-		//switch (mode)
-		//{
-		//case 1:
-		//	Transform::Idle();	break;
-		//case 2:
-		//	Transform::Walk(deltaTime);	break;
-		//case 3:
-		//	Transform::Jump(deltaTime);	break;
-		//}
-
+		// update animation
 		currentAnimation->update(deltaTime);
 
+		// set background color
 		glClearColor(0.0f, 0.125f, 0.25f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		shader.use();
+
+		// set matrices
 		shader.setMat4("view", camera.getViewMatrix());
 		shader.setMat4("projection", projMat);
+		shader.setMat4("model", glm::mat4(1.0f));
 
+		// set light
 		shader.setVec3("light.pos", light.position);
 		shader.setVec3("light.color", light.color);
 
+		// set camera position
 		shader.setVec3("cameraPos", camera.position);
 
-		shader.setMat4("model", glm::mat4(1.0f));
+		// draw calls
 		mesh.draw(&shader);	//Draw Box
-
 		model.Draw(&shader); //Draw Model
 
 		glfwSwapBuffers(window);
@@ -209,5 +193,5 @@ void initGLEW()
 
 void mouse_callback(GLFWwindow* window, double xPos, double yPos)
 {
-	camera.onMousePositionChanged(xPos, yPos, firstMouse);
+	camera.onMousePositionChanged(xPos, yPos);
 }

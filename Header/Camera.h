@@ -17,6 +17,10 @@ public:
 	Camera(glm::vec3 position, float pitch, float yaw, glm::vec3 worldUp);
 	int processInput(GLFWwindow* window, float deltaTime);
 	glm::mat4 getViewMatrix();
-	void onMousePositionChanged(double xPos, double yPos, bool& firstMouse);
+	void onMousePositionChanged(double xPos, double yPos);
+
+private:
+	bool firstMouse;
+	bool freeLooking;
 };
 

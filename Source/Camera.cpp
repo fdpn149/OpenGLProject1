@@ -10,6 +10,9 @@ Camera::Camera(glm::vec3 position, glm::vec3 target, glm::vec3 worldUp)
 	this->up = glm::normalize(glm::cross(right, target));
 	this->pitch = 0;
 	this->yaw = 0;
+
+	firstMouse = true;
+	freeLooking = true;
 }
 
 Camera::Camera(glm::vec3 position, float pitch, float yaw, glm::vec3 worldUp)
@@ -24,17 +27,41 @@ Camera::Camera(glm::vec3 position, float pitch, float yaw, glm::vec3 worldUp)
 	forward = glm::normalize(forward);
 	right = glm::normalize(glm::cross(forward, worldUp));
 	up = glm::normalize(glm::cross(right, forward));
+
+	firstMouse = true;
+	freeLooking = true;
 }
 
 int Camera::processInput(GLFWwindow* window, float deltaTime)
 {
-	float cameraSpeed = 2.5f * deltaTime;
+	// Prevent from key jitter
+	static bool escapeHolding;
 
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 	{
-		glfwSetWindowShouldClose(window, true);
-		return -1;
+		escapeHolding = true;
 	}
+
+	// Enable/Disable controlling when release escape key
+	if (escapeHolding && glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_RELEASE)
+	{
+		freeLooking = !freeLooking;
+
+		if (freeLooking)
+		{
+			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		}
+		else
+		{
+			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+			firstMouse = true;
+		}
+
+		escapeHolding = false;
+	}
+
+	// set camera move speed
+	float cameraSpeed = 2.5f * deltaTime;
 
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		position -= cameraSpeed * forward;
@@ -66,39 +93,42 @@ glm::mat4 Camera::getViewMatrix()
 	return glm::lookAt(position, position - forward, worldUp);
 }
 
-void Camera::onMousePositionChanged(double xPos, double yPos, bool& firstMouse)
+void Camera::onMousePositionChanged(double xPos, double yPos)
 {
-	if (firstMouse)
+	if (freeLooking)
 	{
+		if (firstMouse)
+		{
+			lastX = xPos;
+			lastY = yPos;
+			firstMouse = false;
+		}
+
+		float xOffset = lastX - xPos;
+		float yOffset = yPos - lastY;
+
 		lastX = xPos;
 		lastY = yPos;
-		firstMouse = false;
-	}
 
-	float xOffset = lastX - xPos;
-	float yOffset = yPos - lastY;
+		xOffset *= sensitivity;
+		yOffset *= sensitivity;
 
-	lastX = xPos;
-	lastY = yPos;
-
-	xOffset *= sensitivity;
-	yOffset *= sensitivity;
-
-	yaw += xOffset;
-	pitch += yOffset;
+		yaw += xOffset;
+		pitch += yOffset;
 
 
-	if (pitch > 89.0f)
-		pitch = 89.0f;
-	else if (pitch < -89.0f)
-		pitch = -89.0f;
+		if (pitch > 89.0f)
+			pitch = 89.0f;
+		else if (pitch < -89.0f)
+			pitch = -89.0f;
 
-	glm::vec3 front;
-	front.x = cos(glm::radians(pitch)) * sin(glm::radians(yaw));
-	front.y = sin(glm::radians(pitch));
-	front.z = cos(glm::radians(pitch)) * cos(glm::radians(yaw));
+		glm::vec3 front;
+		front.x = cos(glm::radians(pitch)) * sin(glm::radians(yaw));
+		front.y = sin(glm::radians(pitch));
+		front.z = cos(glm::radians(pitch)) * cos(glm::radians(yaw));
 
-	forward = glm::normalize(front);
-	right = glm::normalize(glm::cross(forward, worldUp));
-	up = glm::normalize(glm::cross(right, forward));
+		forward = glm::normalize(front);
+		right = glm::normalize(glm::cross(forward, worldUp));
+		up = glm::normalize(glm::cross(right, forward));
+	}	
 }

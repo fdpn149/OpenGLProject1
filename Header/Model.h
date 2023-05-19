@@ -23,10 +23,6 @@ class Model
 {
 public:
 	Model(std::string path);
-	~Model();
-
-	//std::map<std::string, Node*> inherit;
-	//std::string directory;
 
 	std::unordered_map<std::string, TransformTreeNode*> componetMap;
 	void Draw(Shader* shader);

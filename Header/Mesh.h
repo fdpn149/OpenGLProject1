@@ -17,7 +17,6 @@ struct Vertex
 class Mesh
 {
 	unsigned int VAO, VBO, EBO;
-	//int size;
 	int mode;
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
@@ -25,7 +24,6 @@ class Mesh
 	void setupMesh();
 public:
 	std::string componet;
-	//Node* node = nullptr;
 	Transform transform;
 	Mesh(float vertices[], int size);
 	Mesh(std::vector<Vertex> vertices);

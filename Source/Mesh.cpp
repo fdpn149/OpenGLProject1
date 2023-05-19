@@ -50,10 +50,6 @@ void Mesh::setupMesh()
 
 void Mesh::draw(Shader* shader)
 {
-	//glm::mat4 modelMat = glm::mat4(1.0f);
-
-	//Transform::HierarchyTrans(modelMat, node);
-
 	shader->use();
 
 	shader->setVec3("material.ambient", material.ambient);
