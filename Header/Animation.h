@@ -30,6 +30,9 @@ protected:
 	glm::vec3 rightForeArmOffset;
 	glm::vec3 leftForeArmOffset;
 
+	glm::vec3 rightHandOffset;
+	glm::vec3 leftHandOffset;
+
 	glm::vec3 rightKneeOffset;
 	glm::vec3 leftKneeOffset;
 

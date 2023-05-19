@@ -161,6 +161,7 @@
   <ItemGroup>
     <ClCompile Include="..\Source\Animation.cpp" />
     <ClCompile Include="..\Source\Camera.cpp" />
+    <ClCompile Include="..\Source\GangnamAnimation.cpp" />
     <ClCompile Include="..\Source\JackpotAnimation.cpp" />
     <ClCompile Include="..\Source\Light.cpp" />
     <ClCompile Include="..\Source\main.cpp" />
@@ -177,6 +178,7 @@
   <ItemGroup>
     <ClInclude Include="..\Header\Animation.h" />
     <ClInclude Include="..\Header\Camera.h" />
+    <ClInclude Include="..\Header\GangnamAnimation.h" />
     <ClInclude Include="..\Header\JackpotAnimation.h" />
     <ClInclude Include="..\Header\Light.h" />
     <ClInclude Include="..\Header\Material.h" />
