@@ -5,6 +5,9 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <STB/stb_image.h>
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
 
 #include "Mesh.h"
 #include "Shader.h"
@@ -84,6 +87,15 @@ int main()
 
 	glEnable(GL_DEPTH_TEST);
 
+	// init dear imgui
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGui::StyleColorsDark();
+
+	ImGui_ImplGlfw_InitForOpenGL(window, true);
+	ImGui_ImplOpenGL3_Init("#version 330 core");
+	
+
 	Light light = Light(glm::vec3(1.5f, 40.0f, 1.5f),
 		glm::vec3(glm::radians(90.0f), glm::radians(90.0f), 0), glm::vec3(2.0f, 2.0f, 2.0f));
 
@@ -118,6 +130,11 @@ int main()
 		// update animation
 		currentAnimation->update(deltaTime);
 
+		// start imgui frame
+		ImGui_ImplOpenGL3_NewFrame();
+		ImGui_ImplGlfw_NewFrame();
+		ImGui::NewFrame();
+
 		// set background color
 		glClearColor(0.0f, 0.125f, 0.25f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -140,11 +157,24 @@ int main()
 		mesh.draw(&shader);	//Draw Box
 		model.Draw(&shader); //Draw Model
 
+		// set imgui ui
+		ImGui::Begin("Window");
+		ImGui::Text("Hellow world!");
+		ImGui::End();
+
+		// render imgui
+		ImGui::Render();
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
 
 	delete currentAnimation;
+
+	ImGui_ImplOpenGL3_Shutdown();
+	ImGui_ImplGlfw_Shutdown();
+	ImGui::DestroyContext();
 
 	glfwTerminate();
 	return 0;
