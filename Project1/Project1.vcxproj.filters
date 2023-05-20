@@ -99,6 +99,9 @@
     <ClCompile Include="..\Include\imgui\imgui.cpp">
       <Filter>Source Files\imgui</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\Skybox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Header\Mesh.h">
@@ -173,6 +176,9 @@
     <ClInclude Include="..\Include\imgui\imgui_impl_opengl3.h">
       <Filter>Header Files\imgui</Filter>
     </ClInclude>
+    <ClInclude Include="..\Header\Skybox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Shader\proj1.frag">
@@ -183,6 +189,12 @@
     </None>
     <None Include="..\Model\robot\robot.mtl">
       <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Shader\skybox.vert">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="..\Shader\skybox.frag">
+      <Filter>Shader Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

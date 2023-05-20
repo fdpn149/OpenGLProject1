@@ -179,6 +179,7 @@
     <ClCompile Include="..\Source\PushUpAnimation.cpp" />
     <ClCompile Include="..\Source\Shader.cpp" />
     <ClCompile Include="..\Source\SitupAnimation.cpp" />
+    <ClCompile Include="..\Source\Skybox.cpp" />
     <ClCompile Include="..\Source\SquatAnimation.cpp" />
     <ClCompile Include="..\Source\Transform.cpp" />
     <ClCompile Include="..\Source\WalkAnimation.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="..\Header\PushUpAnimation.h" />
     <ClInclude Include="..\Header\Shader.h" />
     <ClInclude Include="..\Header\SitupAnimation.h" />
+    <ClInclude Include="..\Header\Skybox.h" />
     <ClInclude Include="..\Header\SquatAnimation.h" />
     <ClInclude Include="..\Header\Transform.h" />
     <ClInclude Include="..\Header\WalkAnimation.h" />
@@ -213,6 +215,8 @@
     <None Include="..\Model\robot\robot.mtl" />
     <None Include="..\Shader\proj1.frag" />
     <None Include="..\Shader\proj1.vert" />
+    <None Include="..\Shader\skybox.frag" />
+    <None Include="..\Shader\skybox.vert" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="..\Model\robot\robot.obj">
