@@ -38,5 +38,8 @@ protected:
 
 	glm::vec3 rightFootOffset;
 	glm::vec3 leftFootOffset;
+
+	glm::vec3 rightHandOffset;
+	glm::vec3 leftHandOffset;
 };
 
