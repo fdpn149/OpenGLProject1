@@ -6,6 +6,7 @@ class JackpotAnimation : public Animation
 {
 public:
 	JackpotAnimation(Model& model, float speed);
+	~JackpotAnimation();
 
 
 	virtual void update(const float& deltaTime) override;
@@ -22,4 +23,5 @@ private:
 
 private:
 	float jumpHeight;
+	int rightForeArmDir;
 };

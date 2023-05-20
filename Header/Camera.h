@@ -3,6 +3,9 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <GLFW/glfw3.h>
 
+const int SCR_WIDTH = 1280;
+const int SCR_HEIGHT = 720;
+
 class Camera
 {
 public:

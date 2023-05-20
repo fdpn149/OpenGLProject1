@@ -6,10 +6,12 @@ class Animation
 {
 public:
 	Animation(Model& model, float speed);
-
+	
+	virtual ~Animation() = default;
 
 	virtual void update(const float& deltaTime) = 0;
 
+	void setSpeed(float speed) { this->speed = speed;  }
 
 protected:
 	Model& model;

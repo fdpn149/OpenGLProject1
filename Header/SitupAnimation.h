@@ -2,9 +2,11 @@
 #include "Animation.h"
 class SitupAnimation : public Animation
 {
-	int stage;
 public:
 	SitupAnimation(Model& model, float speed);
+
+	~SitupAnimation();
+
 	void update(const float& deltaTime);
 private:
 	void setLieBodyTrans(const float& deltaTime, bool& changeStage);
@@ -20,5 +22,10 @@ private:
 
 	void setBodyTrans(const float& deltaTime);
 	void setWaistBaseTrans(const float& deltaTime);
+
+private:
+	int stage;
+
+	int bodyDir;
 };
 

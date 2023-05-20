@@ -3,7 +3,10 @@
 class SquatAnimation : public Animation
 {
 public:
-	SquatAnimation(Model& model, float speed) : Animation(model, speed){}
+	SquatAnimation(Model& model, float speed);
+
+	~SquatAnimation();
+
 	virtual void update(const float& deltaTime) override;
 
 private:
@@ -18,5 +21,8 @@ private:
 	void setLeftArmTrans(float deltaTime);
 	void setRightForeArmTrans(float deltaTime);
 	void setLeftForeArmTrans(float deltaTime);
+
+private:
+	int waistDir;
 };
 

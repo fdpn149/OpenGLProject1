@@ -5,11 +5,9 @@
 class MoonWalkAnimation : public Animation
 {
 public:
-	MoonWalkAnimation(Model& model, float speed)
-		:Animation(model, speed)
-	{
-		modelMat = glm::mat4(1.0f);
-	}
+	MoonWalkAnimation(Model& model, float speed);
+
+	~MoonWalkAnimation();
 
 	void update(const float& deltaTime) override;
 
@@ -22,4 +20,9 @@ private:
 
 private:
 	glm::mat4 modelMat;
+
+	int rightArmDir;
+	int leftArmDir;
+	int rightLegDir;
+	int leftLegDir;
 };

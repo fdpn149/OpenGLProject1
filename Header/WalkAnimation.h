@@ -6,10 +6,8 @@
 class WalkAnimation : public Animation
 {
 public: 
-	WalkAnimation(Model& model, float speed)
-		:Animation(model, speed)
-	{
-	}
+	WalkAnimation(Model& model, float speed);
+	~WalkAnimation();
 
 	virtual void update(const float& deltaTime) override;
 
@@ -20,5 +18,11 @@ private:
 	void setLeftArmTrans(float deltaTime);
 	void setRightThighTrans(float deltaTime);
 	void setLeftThighTrans(float deltaTime);
+
+private:
+	int rightArmDir;
+	int leftArmDir;
+	int rightThighDir;
+	int leftThighDir;
 };
 

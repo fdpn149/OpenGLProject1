@@ -1,9 +1,23 @@
 #include "SitupAnimation.h"
 
 SitupAnimation::SitupAnimation(Model& model, float speed)
-	: Animation(model, speed)
+	: Animation(model, speed), stage(0), bodyDir(1)
 {
-	stage = 0;
+
+}
+
+SitupAnimation::~SitupAnimation()
+{
+	model.componetMap["body_base"]->transform = Transform();
+	model.componetMap["waist_base"]->transform = Transform();
+	model.componetMap["right_arm"]->transform = Transform();
+	model.componetMap["left_arm"]->transform = Transform();
+	model.componetMap["right_forearm"]->transform = Transform();
+	model.componetMap["left_forearm"]->transform = Transform();
+	model.componetMap["right_knee"]->transform = Transform();
+	model.componetMap["left_knee"]->transform = Transform();
+	model.componetMap["right_foot"]->transform = Transform();
+	model.componetMap["left_foot"]->transform = Transform();
 }
 
 void SitupAnimation::update(const float& deltaTime)
@@ -129,7 +143,7 @@ void SitupAnimation::setLieRightForeArmTrans(const float& deltaTime, bool& chang
 {
 	float angle = model.componetMap["right_forearm"]->transform.rotate.w;
 
-	Transform newTrans(glm::vec4(0.063f, 0.099f,   0.993f, (angle + speed * deltaTime * 95.4f / 180.0f)), rightForeArmOffset, glm::vec3(0, 0, 0));
+	Transform newTrans(glm::vec4(0.063f, 0.099f, 0.993f, (angle + speed * deltaTime * 95.4f / 180.0f)), rightForeArmOffset, glm::vec3(0, 0, 0));
 
 	model.componetMap["right_forearm"]->transform = newTrans;
 
@@ -151,37 +165,41 @@ void SitupAnimation::setLieLeftForeArmTrans(const float& deltaTime, bool& change
 
 void SitupAnimation::setBodyTrans(const float& deltaTime)
 {
-	static int direction = 1;
 	float angle = model.componetMap["body_base"]->transform.rotate.w;
 
-	Transform newTrans(glm::vec4(1.0f, 0.0f, 0.0f, (angle + direction * speed * deltaTime * 75.0f / 180.0f)), bodyOffset, bodyOffset - glm::vec3(0, -0.2243f, 2.552f));
+	float newAngle = angle + bodyDir * speed * deltaTime * 75.0f / 180.0f;
+
+	Transform newTrans(glm::vec4(1.0f, 0.0f, 0.0f, newAngle), bodyOffset, bodyOffset - glm::vec3(0, -0.2243f, 2.552f));
+
 	model.componetMap["body_base"]->transform = newTrans;
 
-	if (angle < glm::radians(-85.0f) && direction == -1)
+	if (angle < glm::radians(-85.0f) && bodyDir == -1)
 	{
-		direction = 1;
+		bodyDir = 1;
 	}
-	else if (angle > glm::radians(-10.0f) && direction == 1)
+	else if (angle > glm::radians(-10.0f) && bodyDir == 1)
 	{
-		direction = -1;
+		bodyDir = -1;
 	}
 }
 
 void SitupAnimation::setWaistBaseTrans(const float& deltaTime)
 {
-	static int direction = 1;
 	float angle = model.componetMap["waist_base"]->transform.rotate.w;
 
-	Transform newTrans(glm::vec4(1.0f, 0.0f, 0.0f, (angle - direction * speed * deltaTime * 75.0f / 180.0f)), waistBaseOffset, glm::vec3(0, 0, 0));
+	float newAngle = angle - bodyDir * speed * deltaTime * 75.0f / 180.0f;
+
+	Transform newTrans(glm::vec4(1.0f, 0.0f, 0.0f, newAngle), waistBaseOffset, glm::vec3(0, 0, 0));
+
 	model.componetMap["waist_base"]->transform = newTrans;
 
-	if (angle > glm::radians(-60.0f) && direction == -1)
-	{
-		direction = 1;
-	}
-	else if (angle < glm::radians(-135.0f) && direction == 1)
-	{
-		direction = -1;
-	}
+	//if (angle > glm::radians(-60.0f) && waistDir == -1)
+	//{
+	//	waistDir = 1;
+	//}
+	//else if (angle < glm::radians(-135.0f) && waistDir == 1)
+	//{
+	//	waistDir = -1;
+	//}
 }
 

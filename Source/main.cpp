@@ -5,6 +5,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <STB/stb_image.h>
+
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
@@ -23,11 +24,20 @@
 #include "PushUpAnimation.h"
 #include "GangnamAnimation.h"
 
-void initGLFW();
-GLFWwindow* initWindow();
-void initGLEW();
+enum class AnimationType
+{
+	WALK,
+	JACKPOT,
+	MOON_WALK,
+	SQUAT,
+	SIT_UP,
+	PUSH_UP,
+	GANGNAM_STYLE,
+	MAX
+};
 
-Camera camera(glm::vec3(0, 0, 3.0f), glm::radians(0.0f), glm::radians(0.0f), glm::vec3(0, 1.0f, 0));
+
+Camera camera(glm::vec3(0, 2.5f, 10.0f), glm::radians(0.0f), glm::radians(0.0f), glm::vec3(0, 1.0f, 0));
 
 float box_vertices[] = {
 	// positions         // normals       // texture coords
@@ -77,7 +87,12 @@ float box_vertices[] = {
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
-void mouse_callback(GLFWwindow* window, double xPos, double yPos);
+void initGLFW();
+GLFWwindow* initWindow();
+void initGLEW();
+void mouseCallback(GLFWwindow* window, double xPos, double yPos);
+void framebufferSizeCallback(GLFWwindow* window, int width, int height);
+Animation* getAnimationByType(Model& model, float speed, AnimationType type);
 
 int main()
 {
@@ -95,28 +110,42 @@ int main()
 	ImGui_ImplGlfw_InitForOpenGL(window, true);
 	ImGui_ImplOpenGL3_Init("#version 330 core");
 	
-
+	// light
 	Light light = Light(glm::vec3(1.5f, 40.0f, 1.5f),
 		glm::vec3(glm::radians(90.0f), glm::radians(90.0f), 0), glm::vec3(2.0f, 2.0f, 2.0f));
 
+	// shader 
 	Shader shader("../Shader/proj1.vert", "../Shader/proj1.frag");
 
+	// box mesh
 	Mesh mesh(box_vertices, SIZEOF(box_vertices));
 
+	// robot model
 	Model model("../Model/robot/robot.obj");
 
-	Animation* currentAnimation;
-	currentAnimation = new GangnamAnimation(model, 2.0f);
-		
+	// model matrix
 	glm::mat4 modelMat = glm::mat4(1.0f);
 	modelMat = glm::translate(modelMat, glm::vec3(0.0f, 0, 0.0f));
 	modelMat = glm::scale(modelMat, glm::vec3(0.2, 0.2, 0.2));
 
+	// projection matrix
 	glm::mat4 projMat;
-	projMat = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
+	projMat = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / SCR_HEIGHT, 0.1f, 100.0f);
 
 	shader.use();
-	int mode = 1;
+	
+	// dropdown menu informations
+	float speed = 1.0f;
+
+	int currentComboItem = 0;
+	AnimationType currentAnimationType = AnimationType::SQUAT;
+
+	const char* animations[] = { "Walk", "Jackpot", "MoonWalk", "Squat", "Sit-up", "PushUp", "GangnamStyle" };
+
+	// anmation
+	Animation* currentAnimation;
+	currentAnimation = new SquatAnimation(model, speed);
+
 	while (!glfwWindowShouldClose(window))
 	{
 		// process time
@@ -159,8 +188,19 @@ int main()
 
 		// set imgui ui
 		ImGui::Begin("Window");
-		ImGui::Text("Hellow world!");
+		ImGui::Combo("Animations", &currentComboItem, animations, sizeof(animations) / sizeof(char*));
+		ImGui::SliderFloat("Speed", &speed, 0.0f, 5.0f);
 		ImGui::End();
+
+		// check if user has select different animation
+		if (static_cast<AnimationType>(currentComboItem) != currentAnimationType)
+		{
+			currentAnimationType = static_cast<AnimationType>(currentComboItem);
+			delete currentAnimation;
+			currentAnimation = getAnimationByType(model, speed, currentAnimationType);
+		}
+
+		currentAnimation->setSpeed(speed);
 
 		// render imgui
 		ImGui::Render();
@@ -194,19 +234,23 @@ void initGLFW()
 
 GLFWwindow* initWindow()
 {
-	GLFWwindow* window = glfwCreateWindow(800, 600, "Project1", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Project1", NULL, NULL);
 	if (window == NULL)
 	{
 		printf("Open window failed.");
 		glfwTerminate();
 		exit(-1);
 	}
+
+	// make context
 	glfwMakeContextCurrent(window);
 
-	glViewport(0, 0, 800, 600);
-
+	// diable cursor visiability
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	glfwSetCursorPosCallback(window, mouse_callback);
+
+	// callbacks
+	glfwSetCursorPosCallback(window, mouseCallback);
+	glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
 
 	return window;
 }
@@ -221,7 +265,45 @@ void initGLEW()
 	}
 }
 
-void mouse_callback(GLFWwindow* window, double xPos, double yPos)
+void mouseCallback(GLFWwindow* window, double xPos, double yPos)
 {
 	camera.onMousePositionChanged(xPos, yPos);
+}
+
+void framebufferSizeCallback(GLFWwindow* window, int width, int height)
+{
+	glViewport(0, 0, width, height);
+}
+
+Animation* getAnimationByType(Model& model, float speed, AnimationType type)
+{
+	switch (type)
+	{
+	case AnimationType::WALK:
+		return new WalkAnimation(model, speed);
+
+	case AnimationType::JACKPOT:
+		return new JackpotAnimation(model, speed);
+
+	case AnimationType::MOON_WALK:
+		return new MoonWalkAnimation(model, speed);
+
+	case AnimationType::SQUAT:
+		return new SquatAnimation(model, speed);
+
+	case AnimationType::SIT_UP:
+		return new SitupAnimation(model, speed);
+
+	case AnimationType::PUSH_UP:
+		return new PushUpAnimation(model, speed);
+
+	case AnimationType::GANGNAM_STYLE:
+		return new GangnamAnimation(model, speed);
+
+	case AnimationType::MAX:
+		return nullptr;
+
+	default:
+		return nullptr;
+	}
 }

@@ -7,6 +7,7 @@ class PushUpAnimation : public Animation
 public: 
 
 	PushUpAnimation(Model& model, float speed);
+	~PushUpAnimation();
 
 
 	void update(const float& deltaTime) override;
@@ -20,4 +21,6 @@ private:
 private:
 	float modelRotation;
 	glm::mat4 modelMat;
+
+	int foreArmDir;
 };

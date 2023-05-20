@@ -17,7 +17,7 @@ GangnamAnimation::GangnamAnimation(Model& model, float speed)
 
 void GangnamAnimation::update(const float& deltaTime)
 {
-	printf("%d\n", *stage);
+	//printf("%d\n", *stage);
 	setBodyTrans(deltaTime);
 	if (*stage == 0)
 	{

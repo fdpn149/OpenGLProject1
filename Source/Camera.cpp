@@ -11,6 +11,10 @@ Camera::Camera(glm::vec3 position, glm::vec3 target, glm::vec3 worldUp)
 	this->pitch = 0;
 	this->yaw = 0;
 
+	// get mouse into the application
+	lastX = SCR_WIDTH / 2;
+	lastY = SCR_HEIGHT / 2;
+
 	firstMouse = true;
 	freeLooking = true;
 }
@@ -27,6 +31,10 @@ Camera::Camera(glm::vec3 position, float pitch, float yaw, glm::vec3 worldUp)
 	forward = glm::normalize(forward);
 	right = glm::normalize(glm::cross(forward, worldUp));
 	up = glm::normalize(glm::cross(right, forward));
+
+	// get mouse into the application
+	lastX = SCR_WIDTH / 2;
+	lastY = SCR_HEIGHT / 2;
 
 	firstMouse = true;
 	freeLooking = true;
