@@ -192,6 +192,7 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
 		tempMaterial.specular = glm::vec3(color.r, color.g, color.b);
 
 	}
+
 	return Mesh({ tempVertices,tempIndices,tempMaterial });
 }
 

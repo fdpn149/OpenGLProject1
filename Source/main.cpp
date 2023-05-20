@@ -165,7 +165,7 @@ int main()
 		ImGui::NewFrame();
 
 		// set background color
-		glClearColor(0.0f, 0.125f, 0.25f, 1.0f);
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		shader.use();
@@ -176,8 +176,11 @@ int main()
 		shader.setMat4("model", glm::mat4(1.0f));
 
 		// set light
-		shader.setVec3("light.pos", light.position);
-		shader.setVec3("light.color", light.color);
+		shader.setVec3("light.pos", glm::vec3(0.0f, -1.0f, 5.0f));
+		shader.setVec3("light.direction", glm::vec3(-0.2f, -1.0f, -0.3f));
+		shader.setVec3("light.ambient", glm::vec3(0.2f, 0.2f, 0.2f));
+		shader.setVec3("light.diffuse", glm::vec3(1.0f, 1.0f, 1.0f));
+		shader.setVec3("light.specular", glm::vec3(1.0f, 1.0f, 1.0f));
 
 		// set camera position
 		shader.setVec3("cameraPos", camera.position);
