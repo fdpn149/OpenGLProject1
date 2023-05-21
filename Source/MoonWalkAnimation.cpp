@@ -29,7 +29,7 @@ void MoonWalkAnimation::update(const float& deltaTime)
 	setRightArm(deltaTime);
 	setLeftArm(deltaTime);
 	
-	/*modelMat = glm::translate(modelMat, glm::vec3(0.0f, 0.0f, -deltaTime * speed));*/
+	modelMat = glm::translate(modelMat, glm::vec3(0.0f, 0.0f, -deltaTime * speed));
 	model.updateTransforms(modelMat);
 }
 

@@ -24,10 +24,9 @@ class Mesh
 	void setupMesh();
 public:
 	std::string componet;
-	Transform transform;
 	Mesh(float vertices[], int size);
 	Mesh(std::vector<Vertex> vertices);
 	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, Material material);
-	void draw(Shader* shader);
+	void draw(Shader& shader);
 };
 
