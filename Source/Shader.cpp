@@ -1,17 +1,24 @@
 #pragma warning(disable:4996)
 #include "Shader.h"
+
+#include <string>
+#include <iostream>
+
 #include <GL/glew.h>
 #include <glm/gtc/type_ptr.hpp>
 
-Shader::Shader(const char* vertexPath, const char* fragmentPath)
+
+Shader::Shader(const char* vertexPath, const char* fragmentPath, const char* geometryPath)
 {
 	char** vShaderCode = loadShaderSource(vertexPath);
 	char** fShaderCode = loadShaderSource(fragmentPath);
+	char** gShaderCode = nullptr;
 
-	unsigned int vertex, fragment;
+	unsigned int vertex, fragment, geometry;
 	int success;
 	char infoLog[512];
 
+	// vertex shader
 	vertex = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertex, 1, vShaderCode, NULL);
 	glCompileShader(vertex);
@@ -23,6 +30,7 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
 		printf("ERROR::SHADER::VERTEX::COMPILATION_FAILED\n%s\n", infoLog);
 	};
 
+	// fragment shader
 	fragment = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragment, 1, fShaderCode, NULL);
 	glCompileShader(fragment);
@@ -34,9 +42,32 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
 		printf("ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n%s", infoLog);
 	};
 
+	// geometry shader
+	if (geometryPath != "")
+	{
+		gShaderCode = loadShaderSource(geometryPath);
+
+		geometry = glCreateShader(GL_GEOMETRY_SHADER);
+		glShaderSource(geometry, 1, gShaderCode, NULL);
+		glGetShaderiv(geometry, GL_COMPILE_STATUS, &success);
+
+		if (!geometry)
+		{
+			glGetShaderInfoLog(fragment, 512, NULL, infoLog);
+			printf("ERROR::SHADER::GEOMETRY::COMPILATION_FAILED\n%s", infoLog);
+		}
+	}
+
 	programID = glCreateProgram();
 	glAttachShader(programID, vertex);
+
+	if (geometryPath != "")
+	{
+		glAttachShader(programID, geometry);
+	}
+
 	glAttachShader(programID, fragment);
+	
 	glLinkProgram(programID);
 
 	glGetProgramiv(programID, GL_LINK_STATUS, &success);
@@ -48,8 +79,17 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
 
 	glDeleteShader(vertex);
 	glDeleteShader(fragment);
+	if (geometryPath != "")
+	{
+		glDeleteShader(geometry);
+	}
+	
 	freeShaderSource(vShaderCode);
 	freeShaderSource(fShaderCode);
+	if (geometryPath != "")
+	{
+		freeShaderSource(gShaderCode);
+	}
 }
 
 char** Shader::loadShaderSource(const char* file)

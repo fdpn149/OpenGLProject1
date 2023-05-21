@@ -48,14 +48,14 @@ void Mesh::setupMesh()
 	glBindVertexArray(0);
 }
 
-void Mesh::draw(Shader* shader)
+void Mesh::draw(Shader& shader)
 {
-	shader->use();
+	shader.use();
 
-	shader->setVec3("material.ambient", material.ambient);
-	shader->setVec3("material.diffuse", material.diffuse);
-	shader->setVec3("material.specular", material.specular);
-	shader->setFloat("material.shininess", material.shininess);
+	shader.setVec3("material.ambient", material.ambient);
+	shader.setVec3("material.diffuse", material.diffuse);
+	shader.setVec3("material.specular", material.specular);
+	shader.setFloat("material.shininess", material.shininess);
 
 	glBindVertexArray(VAO);
 	switch (mode)

@@ -7,7 +7,7 @@ class Shader
 	char** loadShaderSource(const char* file);
 	void freeShaderSource(char** srcp);
 public:
-	Shader(const char* vertexPath, const char* fragmentPath);
+	Shader(const char* vertexPath, const char* fragmentPath, const char* geometryPath = "");
 	void use();
 	void setInt(const char* name, int value);
 	void setFloat(const char* name, float value);

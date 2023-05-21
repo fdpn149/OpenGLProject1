@@ -25,6 +25,8 @@
 #include "GangnamAnimation.h"
 
 #include "Skybox.h"
+#include "Plane.h"
+#include "Grass.h"
 
 enum class AnimationType
 {
@@ -113,26 +115,29 @@ int main()
 	ImGui_ImplOpenGL3_Init("#version 330 core");
 	
 	// light
-	Light light = Light(glm::vec3(1.5f, 40.0f, 1.5f),
-		glm::vec3(glm::radians(90.0f), glm::radians(90.0f), 0), glm::vec3(2.0f, 2.0f, 2.0f));
+	Light light(glm::vec3(-0.2f, -1.0f, -0.3f), glm::vec3(0.2f, 0.2f, 0.2f), glm::vec3(1.0f), glm::vec3(1.0f));
 
 	// skybox
 	Skybox skybox("../Skybox/");
 
 	// shaders
 	Shader shader("../Shader/proj1.vert", "../Shader/proj1.frag");
+	Shader textureShader("../Shader/texture.vert", "../Shader/texture.frag");
 	Shader skyboxShader("../Shader/skybox.vert", "../Shader/skybox.frag");
+
+	Shader grassShader("../Shader/grass.vert", "../Shader/grass.frag", "../Shader/grass.geom");
 
 	// box mesh
 	Mesh mesh(box_vertices, SIZEOF(box_vertices));
 
+	// plane 
+	Plane plane("../Textures/grass_diffuse.jpg", "../Textures/grass_specular.jpg");
+
+	// grass
+	Grass grass("../Textures/grass_atlas.png", "../Textures/wind.jpg");
+
 	// robot model
 	Model model("../Model/robot/robot.obj");
-
-	// model matrix
-	glm::mat4 modelMat = glm::mat4(1.0f);
-	modelMat = glm::translate(modelMat, glm::vec3(0.0f, 0, 0.0f));
-	modelMat = glm::scale(modelMat, glm::vec3(0.2, 0.2, 0.2));
 
 	// projection matrix
 	glm::mat4 projMat;
@@ -145,6 +150,10 @@ int main()
 	AnimationType currentAnimationType = AnimationType::SQUAT;
 
 	const char* animations[] = { "Walk", "Jackpot", "MoonWalk", "Squat", "Sit-up", "PushUp", "GangnamStyle" };
+
+	// model matrix
+	glm::mat4 grassModelMat = glm::mat4(1.0f);
+	grassModelMat = glm::scale(grassModelMat, glm::vec3(1.0f, 1.0f, 1.0f));
 
 	// anmation
 	Animation* currentAnimation;
@@ -172,7 +181,9 @@ int main()
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		// skybox matrices
+
+		// Skybox
+		//-------
 		skyboxShader.use();
 		skyboxShader.setMat4("view", glm::mat4(glm::mat3(camera.getViewMatrix())));
 		skyboxShader.setMat4("projection", projMat);
@@ -180,27 +191,54 @@ int main()
 		// draw skybox
 		skybox.draw(skyboxShader);
 
-		// objects matrices
+		// Grass
+		//------
+		grassShader.use();
+		grassShader.setMat4("view", camera.getViewMatrix());
+		grassShader.setMat4("projection", projMat);
+
+		// wind time
+		grassShader.setFloat("time", lastFrame);
+		
+		grass.draw(grassShader);
+
+
+		// Plane
+		//------
+		textureShader.use();
+		textureShader.setMat4("view", camera.getViewMatrix());
+		textureShader.setMat4("projection", projMat);
+		textureShader.setMat4("model", grassModelMat);
+
+		// set camera position
+		textureShader.setVec3("cameraPos", camera.position);
+
+		// set light
+		light.setLight2Shader(textureShader);
+
+		// draw texture objects
+		plane.draw(textureShader);
+
+
+		// Model
+		//------
 		shader.use();
 		shader.setMat4("view", camera.getViewMatrix());
 		shader.setMat4("projection", projMat);
 		shader.setMat4("model", glm::mat4(1.0f));
 
-		// set light
-		shader.setVec3("light.pos", glm::vec3(0.0f, -1.0f, 5.0f));
-		shader.setVec3("light.direction", glm::vec3(-0.2f, -1.0f, -0.3f));
-		shader.setVec3("light.ambient", glm::vec3(0.2f, 0.2f, 0.2f));
-		shader.setVec3("light.diffuse", glm::vec3(1.0f, 1.0f, 1.0f));
-		shader.setVec3("light.specular", glm::vec3(1.0f, 1.0f, 1.0f));
-
 		// set camera position
 		shader.setVec3("cameraPos", camera.position);
 
+		// set light
+		light.setLight2Shader(shader);
+		
 		// draw calls
-		mesh.draw(&shader);	//Draw Box
-		model.Draw(&shader); //Draw Model
+		model.Draw(shader);
 
-		// set imgui ui
+
+		// GUI
+		//----
 		ImGui::Begin("Window");
 		ImGui::Combo("Animations", &currentComboItem, animations, sizeof(animations) / sizeof(char*));
 		ImGui::SliderFloat("Speed", &speed, 0.0f, 5.0f);

@@ -31,12 +31,12 @@ void Model::readNodeHierachy(TransformTreeNode* node, const glm::mat4 parentTran
 	}
 }
 
-void Model::Draw(Shader* shader)
+void Model::Draw(Shader& shader)
 {
 	for (GLuint i = 0; i < meshes.size(); i++)
 	{
-		shader->use();
-		shader->setMat4("model", componetMap[meshes[i].componet]->finalTransform);
+		shader.use();
+		shader.setMat4("model", componetMap[meshes[i].componet]->finalTransform);
 		if (meshes[i].componet == "body_base");
 		meshes[i].draw(shader);
 	}
@@ -193,6 +193,6 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
 
 	}
 
-	return Mesh({ tempVertices,tempIndices,tempMaterial });
+	return Mesh({ tempVertices, tempIndices, tempMaterial });
 }
 
