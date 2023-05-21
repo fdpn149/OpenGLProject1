@@ -21,9 +21,5 @@ private:
 	void setLeftKneeTrans(float deltaTime);
 	void setRightHandTrans(float deltaTime);
 	void setLeftHandTrans(float deltaTime);
-	void setRightArmTrans2(const float& deltaTime);
-	void setLeftArmTrans2(const float& deltaTime);
-	void setRightForeArmTrans2(const float& deltaTime);
-	void setLeftForeArmTrans2(const float& deltaTime);
 };
 
