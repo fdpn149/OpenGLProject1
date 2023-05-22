@@ -6,13 +6,28 @@ GangnamAnimation::GangnamAnimation(Model& model, float speed)
 {
 	stage = &stages[0];
 
-	model.componetMap["right_arm"]->transform.set(glm::vec4(-1.0f, 0.2f, -0.05f, glm::radians(150.0f)), rightArmOffset, glm::vec3(0, 0, 0));
+	action1Init();
+}
+
+void GangnamAnimation::action1Init()
+{
 	model.componetMap["left_arm"]->transform.set(glm::vec4(-0.8f, -0.5f, -0.2f, glm::radians(60.0f)), leftArmOffset, glm::vec3(0, 0, 0));
+	model.componetMap["right_arm"]->transform.set(glm::vec4(-1.0f, 0.2f, -0.05f, glm::radians(150.0f)), rightArmOffset, glm::vec3(0, 0, 0));
 	model.componetMap["left_forearm"]->transform.set(glm::vec4(-0.1f, -0.3f, -1.0f, glm::radians(60.0f)), leftForeArmOffset, glm::vec3(0, 0, 0));
 	model.componetMap["right_thigh"]->transform.set(glm::vec4(0.0f, 0.0f, -1.0f, glm::radians(12.0f)), rightThighOffset, glm::vec3(0, 0, 0));
 	model.componetMap["left_thigh"]->transform.set(glm::vec4(0.0f, 0.0f, 1.0f, glm::radians(12.0f)), leftThighOffset, glm::vec3(0, 0, 0));
 	model.componetMap["right_knee"]->transform.set(glm::vec4(0.0f, 0.0f, 1.0f, glm::radians(12.0f)), rightKneeOffset, glm::vec3(0, 0, 0));
 	model.componetMap["left_knee"]->transform.set(glm::vec4(0.0f, 0.0f, -1.0f, glm::radians(12.0f)), leftKneeOffset, glm::vec3(0, 0, 0));
+}
+
+void GangnamAnimation::action2Init()
+{
+	model.componetMap["left_arm"]->transform.set(glm::vec4(-0.9f, 0.25f, -0.36f, glm::radians(45.0f)), leftArmOffset, glm::vec3(0, 0, 0));
+	model.componetMap["right_arm"]->transform.set(glm::vec4(-0.9f, -0.05f, 0.45f, glm::radians(42.0f)), rightArmOffset, glm::vec3(0, 0, 0));
+	model.componetMap["left_forearm"]->transform.set(glm::vec4(0.06f, -0.5f, -0.8f, glm::radians(75.0f)), leftForeArmOffset, glm::vec3(0, 0, 0));
+	model.componetMap["right_forearm"]->transform.set(glm::vec4(-0.22f, 0.96f, -0.18f, glm::radians(112.0f)), rightForeArmOffset, glm::vec3(0, 0, 0));
+	model.componetMap["left_hand"]->transform.set(glm::vec4(0.12f, -0.8f, 0.6f, glm::radians(112.0f)), leftHandOffset, glm::vec3(0, 0, 0));
+	model.componetMap["right_hand"]->transform.set(glm::vec4(-0.1f, -0.25f, -0.96f, glm::radians(42.0f)), rightHandOffset, glm::vec3(0, 0, 0));
 }
 
 void GangnamAnimation::update(const float& deltaTime)
@@ -21,25 +36,15 @@ void GangnamAnimation::update(const float& deltaTime)
 	setBodyTrans(deltaTime);
 	if (*stage == 0)
 	{
-		model.componetMap["left_arm"]->transform.set(glm::vec4(-0.8f, -0.5f, -0.2f, glm::radians(60.0f)), leftArmOffset, glm::vec3(0, 0, 0));
-		model.componetMap["right_arm"]->transform.set(glm::vec4(-1.0f, 0.2f, -0.05f, glm::radians(150.0f)), rightArmOffset, glm::vec3(0, 0, 0));
-		model.componetMap["left_forearm"]->transform.set(glm::vec4(-0.1f, -0.3f, -1.0f, glm::radians(60.0f)), leftForeArmOffset, glm::vec3(0, 0, 0));
-		model.componetMap["right_thigh"]->transform.set(glm::vec4(0.0f, 0.0f, -1.0f, glm::radians(12.0f)), rightThighOffset, glm::vec3(0, 0, 0));
-		model.componetMap["left_thigh"]->transform.set(glm::vec4(0.0f, 0.0f, 1.0f, glm::radians(12.0f)), leftThighOffset, glm::vec3(0, 0, 0));
-		model.componetMap["right_knee"]->transform.set(glm::vec4(0.0f, 0.0f, 1.0f, glm::radians(12.0f)), rightKneeOffset, glm::vec3(0, 0, 0));
-		model.componetMap["left_knee"]->transform.set(glm::vec4(0.0f, 0.0f, -1.0f, glm::radians(12.0f)), leftKneeOffset, glm::vec3(0, 0, 0));
+		action1Init();
 		stage = stages;
 	}
 	else if (*stage == 10)
 	{
-		model.componetMap["left_arm"]->transform.set(glm::vec4(-0.9f, 0.25f, -0.36f, glm::radians(45.0f)), leftArmOffset, glm::vec3(0, 0, 0));
-		model.componetMap["right_arm"]->transform.set(glm::vec4(-0.9f, -0.05f, 0.45f, glm::radians(42.0f)), rightArmOffset, glm::vec3(0, 0, 0));
-		model.componetMap["left_forearm"]->transform.set(glm::vec4(0.06f, -0.5f, -0.8f, glm::radians(75.0f)), leftForeArmOffset, glm::vec3(0, 0, 0));
-		model.componetMap["right_forearm"]->transform.set(glm::vec4(-0.22f, 0.96f, -0.18f, glm::radians(112.0f)), rightForeArmOffset, glm::vec3(0, 0, 0));
-		model.componetMap["left_hand"]->transform.set(glm::vec4(0.12f, -0.8f, 0.6f, glm::radians(112.0f)), leftHandOffset, glm::vec3(0, 0, 0));
-		model.componetMap["right_hand"]->transform.set(glm::vec4(-0.1f, -0.25f, -0.96f, glm::radians(42.0f)), rightHandOffset, glm::vec3(0, 0, 0));
+		action2Init();
 		stage++;
 	}
+
 
 	if (*stage < 10)
 	{
@@ -107,10 +112,6 @@ void GangnamAnimation::setRightArmTrans(const float& deltaTime)
 	model.componetMap["right_arm"]->transform = newTrans;
 }
 
-void GangnamAnimation::setLeftArmTrans(const float& deltaTime)
-{
-}
-
 void GangnamAnimation::setRightForeArmTrans(const float& deltaTime)
 {
 	float angle = model.componetMap["right_forearm"]->transform.rotate.w;
@@ -164,14 +165,14 @@ void GangnamAnimation::setRightThighTrans(float deltaTime)
 
 	float angle = model.componetMap["right_thigh"]->transform.rotate.w;
 
-	Transform newTrans(glm::vec4(rotateAxisWithRange(angle, glm::radians(12.0f), glm::radians(60.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(-0.85f, -0.5f, -0.2f)), (angle + direction * speed * deltaTime * 48.0f * 0.0335f)), rightThighOffset, glm::vec3(0, 0, 0));
+	Transform newTrans(glm::vec4(rotateAxisWithRange(angle, glm::radians(12.0f), glm::radians(50.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(-0.85f, 0.05f, -0.5f)), (angle + direction * speed * deltaTime * 38.0f * 0.0335f)), rightThighOffset, glm::vec3(0, 0, 0));
 	model.componetMap["right_thigh"]->transform = newTrans;
 
 	if (angle < glm::radians(12.0f) && direction == -1)
 	{
 		direction = 1;
 	}
-	else if (angle > glm::radians(60.0f) && direction == 1)
+	else if (angle > glm::radians(50.0f) && direction == 1)
 	{
 		direction = -1;
 	}
@@ -183,14 +184,14 @@ void GangnamAnimation::setLeftThighTrans(float deltaTime)
 
 	float angle = model.componetMap["left_thigh"]->transform.rotate.w;
 
-	Transform newTrans(glm::vec4(rotateAxisWithRange(angle, glm::radians(12.0f), glm::radians(60.0f), glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(-0.85f, 0.5f, 0.2f)), (angle + direction * speed * deltaTime * 48.0f * 0.0335f)), leftThighOffset, glm::vec3(0, 0, 0));
+	Transform newTrans(glm::vec4(rotateAxisWithRange(angle, glm::radians(12.0f), glm::radians(50.0f), glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(-0.85f, 0.05f, 0.5f)), (angle + direction * speed * deltaTime * 38.0f * 0.0335f)), leftThighOffset, glm::vec3(0, 0, 0));
 	model.componetMap["left_thigh"]->transform = newTrans;
 
 	if (angle < glm::radians(12.0f) && direction == -1)
 	{
 		direction = 1;
 	}
-	else if (angle > glm::radians(60.0f) && direction == 1)
+	else if (angle > glm::radians(50.0f) && direction == 1)
 	{
 		direction = -1;
 	}
@@ -202,14 +203,14 @@ void GangnamAnimation::setRightKneeTrans(float deltaTime)
 
 	float angle = model.componetMap["right_knee"]->transform.rotate.w;
 
-	Transform newTrans(glm::vec4(rotateAxisWithRange(angle, glm::radians(12.0f), glm::radians(60.0f), glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(1.0f, 0.0f, 0.0f)), (angle + direction * speed * deltaTime * 48.0f * 0.0335f)), rightKneeOffset, glm::vec3(0, 0, 0));
+	Transform newTrans(glm::vec4(rotateAxisWithRange(angle, glm::radians(12.0f), glm::radians(50.0f), glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.85f, -0.05f, 0.5f)), (angle + direction * speed * deltaTime * 38.0f * 0.0335f)), rightKneeOffset, glm::vec3(0, 0, 0));
 	model.componetMap["right_knee"]->transform = newTrans;
 
 	if (angle < glm::radians(12.0f) && direction == -1)
 	{
 		direction = 1;
 	}
-	else if (angle > glm::radians(60.0f) && direction == 1)
+	else if (angle > glm::radians(50.0f) && direction == 1)
 	{
 		direction = -1;
 	}
@@ -221,14 +222,14 @@ void GangnamAnimation::setLeftKneeTrans(float deltaTime)
 
 	float angle = model.componetMap["left_knee"]->transform.rotate.w;
 
-	Transform newTrans(glm::vec4(rotateAxisWithRange(angle, glm::radians(12.0f), glm::radians(60.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(1.0f, 0.0f, 0.0f)), (angle + direction * speed * deltaTime * 48.0f * 0.0335f)), leftKneeOffset, glm::vec3(0, 0, 0));
+	Transform newTrans(glm::vec4(rotateAxisWithRange(angle, glm::radians(12.0f), glm::radians(50.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.85f, -0.05f, -0.5f)), (angle + direction * speed * deltaTime * 38.0f * 0.0335f)), leftKneeOffset, glm::vec3(0, 0, 0));
 	model.componetMap["left_knee"]->transform = newTrans;
 
 	if (angle < glm::radians(12.0f) && direction == -1)
 	{
 		direction = 1;
 	}
-	else if (angle > glm::radians(60.0f) && direction == 1)
+	else if (angle > glm::radians(50.0f) && direction == 1)
 	{
 		direction = -1;
 	}
