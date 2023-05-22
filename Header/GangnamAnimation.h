@@ -6,6 +6,7 @@ class GangnamAnimation : public Animation
 	int* stage;
 public:
 	GangnamAnimation(Model& model, float speed);
+	~GangnamAnimation();
 	void update(const float& deltaTime);
 private:
 	int stages[18] = { 1,2,3,5,4,7,6,8,10,11,12,13,15,14,17,16,18,0 };

@@ -119,11 +119,11 @@ void SitupAnimation::setLieRightArmTrans(const float& deltaTime, bool& changeSta
 {
 	float angle = model.componetMap["right_arm"]->transform.rotate.w;
 
-	Transform newTrans(glm::vec4(-0.95f, 0.168f,  0.263f, (angle + speed * deltaTime * 67.7f / 180.0f)), rightArmOffset, glm::vec3(0, 0, 0));
+	Transform newTrans(glm::vec4(-0.85f, -0.3f,  0.35f, (angle + speed * deltaTime * 120.0f / 180.0f)), rightArmOffset, glm::vec3(0, 0, 0));
 	
 	model.componetMap["right_arm"]->transform = newTrans;
 
-	if (angle < glm::radians(67.7f))
+	if (angle < glm::radians(120.0f))
 		changeStage = false;
 }
 
@@ -131,7 +131,7 @@ void SitupAnimation::setLieLeftArmTrans(const float& deltaTime, bool& changeStag
 {
 	float angle = model.componetMap["left_arm"]->transform.rotate.w;
 
-	Transform newTrans(glm::vec4(-0.943f, -0.166f, -0.288f, (angle + speed * deltaTime * 62.9f / 180.0f)), leftArmOffset, glm::vec3(0, 0, 0));
+	Transform newTrans(glm::vec4(-0.85f, 0.3f, -0.35f, (angle + speed * deltaTime * 120.0f / 180.0f)), leftArmOffset, glm::vec3(0, 0, 0));
 
 	model.componetMap["left_arm"]->transform = newTrans;
 
@@ -143,7 +143,7 @@ void SitupAnimation::setLieRightForeArmTrans(const float& deltaTime, bool& chang
 {
 	float angle = model.componetMap["right_forearm"]->transform.rotate.w;
 
-	Transform newTrans(glm::vec4(0.063f, 0.099f, 0.993f, (angle + speed * deltaTime * 95.4f / 180.0f)), rightForeArmOffset, glm::vec3(0, 0, 0));
+	Transform newTrans(glm::vec4(0.05f, 0.25f, 1.0f, (angle + speed * deltaTime * 120.0f / 180.0f)), rightForeArmOffset, glm::vec3(0, 0, 0));
 
 	model.componetMap["right_forearm"]->transform = newTrans;
 
@@ -155,7 +155,7 @@ void SitupAnimation::setLieLeftForeArmTrans(const float& deltaTime, bool& change
 {
 	float angle = model.componetMap["left_forearm"]->transform.rotate.w;
 
-	Transform newTrans(glm::vec4(-0.179f, -0.495f, -0.85f, (angle + speed * deltaTime * 97.7f / 180.0f)), leftForeArmOffset, glm::vec3(0, 0, 0));
+	Transform newTrans(glm::vec4(0.05f, -0.25f, -1.0f, (angle + speed * deltaTime * 120.0f / 180.0f)), leftForeArmOffset, glm::vec3(0, 0, 0));
 
 	model.componetMap["left_forearm"]->transform = newTrans;
 
